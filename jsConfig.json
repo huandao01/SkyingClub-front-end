@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@data-access/*": ["src/data-access/*"],
+      "@redux/*": ["src/redux/*"],
+      "@pages/*": ["src/pages/*"],
+      "@assets/*": ["src/assets/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@svg/*": ["src/assets/svg/*"],
+      "@videos/*": ["src/assets/videos/*"],
+      "@utils/*": ["src/utils/*"]
+    }
+  }
+}
