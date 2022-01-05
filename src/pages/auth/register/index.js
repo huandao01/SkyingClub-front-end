@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { WrapperStyled } from "./styled";
 import { message } from "antd";
 
-const Register = ({ _register }) => {
+const Register = ({ _register, history }) => {
   const [state, _setState] = useState({});
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -164,6 +164,14 @@ const Register = ({ _register }) => {
               <div className="sub-w3l">
                 <div className="right-w3l" onClick={handleSubmit}>
                   <input type="submit" value="Sign in" />
+                </div>
+                <div
+                  className="right-w3l"
+                  onClick={() => {
+                    history.push("/auth/login");
+                  }}
+                >
+                  <input type="submit" value="Login in" />
                 </div>
               </div>
             </form>

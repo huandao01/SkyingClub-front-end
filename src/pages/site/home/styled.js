@@ -138,7 +138,6 @@ export const WrapperStyled = styled.div`
     justify-content: space-between;
   }
 
-
   .frame-header-name {
     font-size: 1.5rem;
     font-weight: 500;
@@ -201,6 +200,7 @@ export const WrapperStyled = styled.div`
     color: #333;
     text-align: left;
     margin: 0 15px 15px 15px;
+    white-space: break-spaces;
   }
 
   .container__body--main-framepost-img {
@@ -276,8 +276,6 @@ export const WrapperStyled = styled.div`
     font-size: 1.45rem;
     margin-left: 2px;
   }
-
-  
 
   /* Khi bài post chưa có nội dung => ko nhấn đc vào nút đăng */
   /* .modal-container-post-btn {
