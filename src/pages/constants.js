@@ -24,7 +24,7 @@ export const route_home_page = [
   {
     component: Page(Home, []),
     accessRoles: [],
-    path: ["/skyingclub/home", "/home"],
+    path: ["/skyingclub/home"],
     exact: true,
   },
 ];

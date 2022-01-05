@@ -1,11 +1,16 @@
 import { message } from "antd";
 import authProvider from "@data-access/auth-provider";
+import clientUtils from "@src/utils/client-utils";
 export default {
   state: {
     auth: (() => {
       try {
         let data = localStorage.getItem("auth") || "";
-        if (data) return JSON.parse(data);
+        if (data) {
+          const parseData = JSON.parse(data);
+          clientUtils.auth = "Bearer " + parseData.token;
+          return parseData;
+        }
       } catch (error) {
         console.log(error);
       }

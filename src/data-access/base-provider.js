@@ -1,8 +1,7 @@
 import { combineUrlParams } from "@utils/common";
 import clientUtils from "@utils/client-utils";
 
-/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-export default (API) => ({
+export default (API = "") => ({
   _search({ page = 0, size = 10, ...param }) {
     return new Promise((resolve, reject) => {
       clientUtils
@@ -23,7 +22,19 @@ export default (API) => ({
         });
     });
   },
-  _create(body) {
+  _detail(id) {
+    return new Promise((resolve, reject) => {
+      clientUtils
+        .requestApi("get", `${API}/${id}`, {})
+        .then((x) => {
+          resolve(x);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    });
+  },
+  _post(body) {
     return new Promise((resolve, reject) => {
       clientUtils
         .requestApi("post", API, body)
@@ -35,7 +46,8 @@ export default (API) => ({
         });
     });
   },
-  _update(body, id) {
+  _put(body, id) {
+    debugger;
     return new Promise((resolve, reject) => {
       clientUtils
         .requestApi("put", `${API}/${id}`, body)

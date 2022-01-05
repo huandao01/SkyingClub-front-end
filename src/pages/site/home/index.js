@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WrapperStyled } from "./styled";
 import "@assets/css/font-awesome.css";
 import { postData, productData } from "./data";
 import Post from "@src/components/Post";
 import ModalCreatePost from "@src/components/ModalCreatePost";
+import { connect } from "react-redux";
 
-const Home = (props) => {
+const Home = ({ auth, getlistBaiViet, listBaiViet }) => {
   const [state, _setState] = useState({
     showModalPost: false,
   });
@@ -13,7 +14,9 @@ const Home = (props) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
 
-  
+  useEffect(() => {
+    getlistBaiViet({});
+  }, []);
 
   return (
     <WrapperStyled>
@@ -31,16 +34,20 @@ const Home = (props) => {
         </div>
         <div class="container__body">
           <div class="container__body--main">
-            <button
-              class="container__body--postbtn js-container__body--postbtn"
-              onClick={() => {
-                setState({ showModalPost: true });
-                console.log("click");
-              }}
-            >
-              Bạn đang nghĩ gì?
-            </button>
-
+            {auth && (
+              <button
+                class="container__body--postbtn js-container__body--postbtn"
+                onClick={() => {
+                  setState({ showModalPost: true });
+                  console.log("click");
+                }}
+              >
+                Bạn đang nghĩ gì?
+              </button>
+            )}
+            {(listBaiViet || []).map((item) => (
+              <Post {...item} />
+            ))}
             {postData.map((item) => (
               <Post {...item} />
             ))}
@@ -75,9 +82,19 @@ const Home = (props) => {
           onClose={() => {
             setState({ showModalPost: false });
           }}
+          afterPost={() => {
+            setState({ showModalPost: false });
+            getlistBaiViet();
+          }}
         />
       )}
     </WrapperStyled>
   );
 };
-export default Home;
+export default connect(
+  ({ auth: { auth }, post: { _listData: listBaiViet } }) => ({
+    auth,
+    listBaiViet,
+  }),
+  ({ post: { _getList: getlistBaiViet } }) => ({ getlistBaiViet })
+)(Home);

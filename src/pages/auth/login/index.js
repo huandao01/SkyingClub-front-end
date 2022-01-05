@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { WrapperStyled } from "./styled";
 
-const Login = ({ _login }) => {
+const Login = ({ _login, history }) => {
   const [state, _setState] = useState({});
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -92,6 +92,14 @@ const Login = ({ _login }) => {
                 </h6>
                 <div class="right-w3l" onClick={handleSubmit}>
                   <input type="submit" value="Login" />
+                </div>
+                <div
+                  class="right-w3l"
+                  onClick={() => {
+                    history.push("/auth/register");
+                  }}
+                >
+                  <input type="submit" value="Register" />
                 </div>
               </div>
             </form>

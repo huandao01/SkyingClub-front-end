@@ -1,10 +1,13 @@
-import React from "react";
+import { timeFromNow } from "@src/utils/common";
+import moment from "moment";
+import React, { useEffect } from "react";
 import { WrapperStyled } from "./styled";
 
 const Post = ({
   content,
   author,
   timestamp,
+  createdAt,
   imgUrl,
   numberLike,
   numberComment,
@@ -21,7 +24,7 @@ const Post = ({
             />
             <ul class="container__body--main-frame-headerNT">
               <li class="frame-header-name">{author}</li>
-              <li class="frame-header-time">{timestamp}</li>
+              <li class="frame-header-time">{timeFromNow(createdAt)}</li>
             </ul>
           </div>
           <div class="sidebar">

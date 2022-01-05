@@ -6,7 +6,7 @@ export default {
   login(body) {
     return new Promise((resolve, reject) => {
       clientUtils
-        .requestApi("post", `${API.account}/login`, body)
+        .requestApi("post", `${API.account}/login`, body, true)
         .then((x) => {
           resolve(x);
         })
@@ -18,7 +18,7 @@ export default {
   register(body) {
     return new Promise((resolve, reject) => {
       clientUtils
-        .requestApi("post", `${API.account}/register`, body)
+        .requestApi("post", `${API.account}/register`, body, true)
         .then((x) => {
           resolve(x);
         })

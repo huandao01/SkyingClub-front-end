@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import { WrapperStyled } from "./styled";
+import { message } from "antd";
 
-const ModalCreatePost = ({ onClose = () => {} }) => {
+const ModalCreatePost = ({
+  auth,
+  _createOrEdit = () => {},
+  onClose = () => {},
+  afterPost = () => {},
+}) => {
+  const [state, _setState] = useState({});
+  const setState = (data) => {
+    _setState((pre) => ({ ...pre, ...data }));
+  };
+
+  const handleSubmit = () => {
+    const { content } = state;
+    if (!content) {
+      message.error("Hãy viết nội dung gì đó");
+      return;
+    }
+
+    _createOrEdit({ content }).then((res) => {
+      if (res && res.code === 0) {
+        message.success("Đăng bài viết thành công");
+        afterPost();
+      } else {
+        message.error(res.message);
+      }
+    });
+  };
+
   return (
     <WrapperStyled>
       <div class="modal js-modal">
@@ -18,7 +47,7 @@ const ModalCreatePost = ({ onClose = () => {} }) => {
               alt=""
               class="modal-container-avt-img"
             />
-            <span class="modal-container-avt-name">Duy Trường</span>
+            <span class="modal-container-avt-name">{auth.full_name}</span>
           </div>
           <textarea
             name="content"
@@ -26,6 +55,10 @@ const ModalCreatePost = ({ onClose = () => {} }) => {
             id=""
             cols="30"
             rows="10"
+            value={state.content}
+            onChange={(e) => {
+              setState({ content: e.target.value });
+            }}
             class="modal-container-content"
           ></textarea>
           <div class="modal-container-footer">
@@ -34,7 +67,9 @@ const ModalCreatePost = ({ onClose = () => {} }) => {
               <i class="modal-container-select-img fa fa-image"></i>
             </div>
             <div class="modal-container-post">
-              <button class="modal-container-post-btn">Đăng bài</button>
+              <button class="modal-container-post-btn" onClick={handleSubmit}>
+                Đăng bài
+              </button>
             </div>
           </div>
         </div>
@@ -43,4 +78,7 @@ const ModalCreatePost = ({ onClose = () => {} }) => {
   );
 };
 
-export default ModalCreatePost;
+export default connect(
+  ({ auth: { auth } }) => ({ auth }),
+  ({ post: { _createOrEdit } }) => ({ _createOrEdit })
+)(ModalCreatePost);

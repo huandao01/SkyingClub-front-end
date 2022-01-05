@@ -14,7 +14,7 @@ export const UrlServer = () => {
 export default {
   auth: "",
   serverApi: UrlServer(),
-  requestApi(methodType, url, body) {
+  requestApi(methodType, url, body, ignoreAuth) {
     return new Promise((resolve, reject) => {
       if (!body) body = {};
       if (methodType.toLowerCase() !== "get") {
@@ -23,19 +23,24 @@ export default {
       this.requestFetch(
         methodType,
         url && url.indexOf("http") === 0 ? url : url,
-        {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: this.auth,
-        },
+        ignoreAuth
+          ? {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            }
+          : {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: this.auth,
+            },
         body
       )
         .then((s) => {
           s.json()
             .then((val) => {
               if (val.code === 401) {
-                localStorage.clear();
-                window.location.href = "/auth/login";
+                // localStorage.clear();
+                // window.location.href = "/auth/login";
               }
               resolve(val);
             })
