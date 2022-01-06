@@ -100,9 +100,9 @@ export default ({
               state[storeName]?._dataEdit?.id
             )
             .then((res) => {
-              if (res.code === 0) {
+              if (res && res.code === 0) {
                 dispatch[storeName].updateData({
-                  _dataEdit: res.data,
+                  _dataEdit: {},
                 });
               } else {
                 message.error(res.message);

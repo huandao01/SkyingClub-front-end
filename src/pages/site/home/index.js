@@ -92,6 +92,7 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
         <ModalCreatePost
           onClose={() => {
             setState({ showModalPost: false });
+            updateData({ _dataEdit: {} });
           }}
           afterPost={() => {
             setState({ showModalPost: false });
