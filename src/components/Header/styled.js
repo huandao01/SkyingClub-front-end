@@ -98,10 +98,6 @@ export const WrapperStyled = styled.a`
   }
 
   /* Search history */
-  .header__search-input:focus ~ .header__search-history {
-    display: block;
-  }
-
   .header__search-history {
     z-index: 1;
     position: absolute;
@@ -111,7 +107,6 @@ export const WrapperStyled = styled.a`
     box-shadow: 0 0 5px rgb(182, 179, 179);
     background-color: #fff;
     overflow: hidden;
-    display: none;
   }
 
   .header__search-history-heading {
@@ -129,6 +124,16 @@ export const WrapperStyled = styled.a`
   .header__search-history-item {
     height: 38px;
     padding: 0 12px;
+
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    color: #333;
+    line-height: 38px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .header__search-history-item:hover {

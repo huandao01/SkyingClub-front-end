@@ -138,14 +138,6 @@
     border-bottom-right-radius: 2px;
 }
 
-.header__search-history-item a {
-    text-decoration: none;
-    display: block;
-    font-size: 1.3rem;
-    color: #333;
-    line-height: 38px;
-}
-
 .header__navbar-user {
     position: relative;
 }

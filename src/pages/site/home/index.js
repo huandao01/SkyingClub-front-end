@@ -20,23 +20,27 @@ const Home = ({ auth, getlistBaiViet, listBaiViet }) => {
 
   return (
     <WrapperStyled>
-      <div class="container">
-        <div class="container__product">
-          <div class="container__product-list">
-            {productData.map((item) => (
-              <a href="" class="container__product-link">
-                <img src={item.imgUrl} alt="" class="container__product-img" />
-                <span class="container__product-title">{item.content}</span>
-                <span class="container__product-buy">Mua ngay</span>
-              </a>
+      <div className="container">
+        <div className="container__product">
+          <div className="container__product-list">
+            {productData.map((item, index) => (
+              <div key={index} href="" className="container__product-link">
+                <img
+                  src={item.imgUrl}
+                  alt=""
+                  className="container__product-img"
+                />
+                <span className="container__product-title">{item.content}</span>
+                <span className="container__product-buy">Mua ngay</span>
+              </div>
             ))}
           </div>
         </div>
-        <div class="container__body">
-          <div class="container__body--main">
+        <div className="container__body">
+          <div className="container__body--main">
             {auth && (
               <button
-                class="container__body--postbtn js-container__body--postbtn"
+                className="container__body--postbtn js-container__body--postbtn"
                 onClick={() => {
                   setState({ showModalPost: true });
                   console.log("click");
@@ -46,33 +50,33 @@ const Home = ({ auth, getlistBaiViet, listBaiViet }) => {
               </button>
             )}
             {(listBaiViet || []).map((item) => (
-              <Post {...item} />
+              <Post key={item.id} {...item} />
             ))}
-            {postData.map((item) => (
-              <Post {...item} />
-            ))}
+            {(listBaiViet || []).length === 0 && (
+              <div>Không tìm thấy kết quả</div>
+            )}
           </div>
         </div>
-        <div class="container__adver">
-          <a href="" class="container__adver-link">
+        <div className="container__adver">
+          <a href="" className="container__adver-link">
             <img
               src="https://statics.lotuscdn.vn/thumb_w/300/web/v1/images/lachanviruscorona_right_banner.png"
               alt=""
-              class="container__adver-img"
+              className="container__adver-img"
             />
           </a>
-          <a href="" class="container__adver-link">
+          <a href="" className="container__adver-link">
             <img
               src="https://statics.lotuscdn.vn/thumb_w/300/web/v1/images/lachanviruscorona_right_banner.png"
               alt=""
-              class="container__adver-img"
+              className="container__adver-img"
             />
           </a>
-          <a href="" class="container__adver-link">
+          <a href="" className="container__adver-link">
             <img
               src="https://statics.lotuscdn.vn/thumb_w/300/web/v1/images/lachanviruscorona_right_banner.png"
               alt=""
-              class="container__adver-img"
+              className="container__adver-img"
             />
           </a>
         </div>

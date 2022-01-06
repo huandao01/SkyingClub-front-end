@@ -36,13 +36,13 @@ const Login = ({ _login, history }) => {
 
   return (
     <WrapperStyled>
-      <div class="center-container">
-        <div class="header-w3l">
+      <div className="center-container">
+        <div className="header-w3l">
           <h1>Online Login Form</h1>
         </div>
-        <div class="main-content-agile">
-          <div class="sub-main-w3">
-            <div class="wthree-pro">
+        <div className="main-content-agile">
+          <div className="sub-main-w3">
+            <div className="wthree-pro">
               <h2>Login Quick</h2>
             </div>
             <form action="#" method="post" className="form-auth">
@@ -56,14 +56,14 @@ const Login = ({ _login, history }) => {
                 <input
                   placeholder="username"
                   name="username"
-                  class="user"
+                  className="user"
                   type="text"
                   onChange={(e) => {
                     setState({ username: e.target.value });
                   }}
                 />
-                <span class="icon1">
-                  <i class="fa fa-user" aria-hidden="true"></i>
+                <span className="icon1">
+                  <i className="fa fa-user" aria-hidden="true"></i>
                 </span>
               </div>
               <div
@@ -76,25 +76,25 @@ const Login = ({ _login, history }) => {
                 <input
                   placeholder="Password"
                   name="Password"
-                  class="pass"
+                  className="pass"
                   type="password"
                   onChange={(e) => {
                     setState({ password: e.target.value });
                   }}
                 />
-                <span class="icon2">
-                  <i class="fa fa-unlock" aria-hidden="true"></i>
+                <span className="icon2">
+                  <i className="fa fa-unlock" aria-hidden="true"></i>
                 </span>
               </div>
-              <div class="sub-w3l">
+              <div className="sub-w3l">
                 <h6>
                   <a href="#">Forgot Password?</a>
                 </h6>
-                <div class="right-w3l" onClick={handleSubmit}>
+                <div className="right-w3l" onClick={handleSubmit}>
                   <input type="submit" value="Login" />
                 </div>
                 <div
-                  class="right-w3l"
+                  className="right-w3l"
                   onClick={() => {
                     history.push("/auth/register");
                   }}
@@ -105,7 +105,7 @@ const Login = ({ _login, history }) => {
             </form>
           </div>
         </div>
-        <div class="footer">
+        <div className="footer">
           <p>&copy; Online Login Form | Design by Skyingclub</p>
         </div>
       </div>

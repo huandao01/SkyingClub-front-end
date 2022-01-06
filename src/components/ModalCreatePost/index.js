@@ -33,21 +33,21 @@ const ModalCreatePost = ({
 
   return (
     <WrapperStyled>
-      <div class="modal js-modal">
-        <div class="modal-container js-modal-container">
-          <div class="modal-header">
-            <span class="modal-container-text">Tạo bài viết</span>
+      <div className="modal js-modal">
+        <div className="modal-container js-modal-container">
+          <div className="modal-header">
+            <span className="modal-container-text">Tạo bài viết</span>
           </div>
-          <div class="modal-close js-modal-close" onClick={onClose}>
-            <i class="fa fa-times"></i>
+          <div className="modal-close js-modal-close" onClick={onClose}>
+            <i className="fa fa-times"></i>
           </div>
-          <div class="modal-container-avt">
+          <div className="modal-container-avt">
             <img
               src="https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn"
               alt=""
-              class="modal-container-avt-img"
+              className="modal-container-avt-img"
             />
-            <span class="modal-container-avt-name">{auth.full_name}</span>
+            <span className="modal-container-avt-name">{auth.full_name}</span>
           </div>
           <textarea
             name="content"
@@ -59,15 +59,15 @@ const ModalCreatePost = ({
             onChange={(e) => {
               setState({ content: e.target.value });
             }}
-            class="modal-container-content"
+            className="modal-container-content"
           ></textarea>
-          <div class="modal-container-footer">
-            <div class="modal-container-select">
-              <span class="modal-container-select-text">Thêm vào bài viết</span>
-              <i class="modal-container-select-img fa fa-image"></i>
+          <div className="modal-container-footer">
+            <div className="modal-container-select">
+              <span className="modal-container-select-text">Thêm vào bài viết</span>
+              <i className="modal-container-select-img fa fa-image"></i>
             </div>
-            <div class="modal-container-post">
-              <button class="modal-container-post-btn" onClick={handleSubmit}>
+            <div className="modal-container-post">
+              <button className="modal-container-post-btn" onClick={handleSubmit}>
                 Đăng bài
               </button>
             </div>
