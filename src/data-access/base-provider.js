@@ -47,7 +47,6 @@ export default (API = "") => ({
     });
   },
   _put(body, id) {
-    debugger;
     return new Promise((resolve, reject) => {
       clientUtils
         .requestApi("put", `${API}/${id}`, body)

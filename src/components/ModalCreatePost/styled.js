@@ -137,4 +137,22 @@ export const WrapperStyled = styled.div`
   .modal-container-post-btn:hover {
     background-color: rgb(7, 107, 230);
   }
+
+  .icon-upload {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+  }
+  .icon-upload:hover {
+    background-color: #ccc;
+  }
+  .img-upload {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    img {
+      border: 1px solid #ccc;
+    }
+  }
 `;

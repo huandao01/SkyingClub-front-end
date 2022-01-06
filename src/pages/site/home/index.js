@@ -6,7 +6,7 @@ import Post from "@src/components/Post";
 import ModalCreatePost from "@src/components/ModalCreatePost";
 import { connect } from "react-redux";
 
-const Home = ({ auth, getlistBaiViet, listBaiViet }) => {
+const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
   const [state, _setState] = useState({
     showModalPost: false,
   });
@@ -16,6 +16,7 @@ const Home = ({ auth, getlistBaiViet, listBaiViet }) => {
 
   useEffect(() => {
     getlistBaiViet({});
+    getUser();
   }, []);
 
   return (
@@ -43,14 +44,20 @@ const Home = ({ auth, getlistBaiViet, listBaiViet }) => {
                 className="container__body--postbtn js-container__body--postbtn"
                 onClick={() => {
                   setState({ showModalPost: true });
-                  console.log("click");
                 }}
               >
                 Bạn đang nghĩ gì?
               </button>
             )}
             {(listBaiViet || []).map((item) => (
-              <Post key={item.id} {...item} />
+              <Post
+                key={item.id}
+                onEdit={() => {
+                  updateData({ _dataEdit: item });
+                  setState({ showModalPost: true });
+                }}
+                {...item}
+              />
             ))}
             {(listBaiViet || []).length === 0 && (
               <div>Không tìm thấy kết quả</div>
@@ -100,5 +107,12 @@ export default connect(
     auth,
     listBaiViet,
   }),
-  ({ post: { _getList: getlistBaiViet } }) => ({ getlistBaiViet })
+  ({
+    post: { _getList: getlistBaiViet, updateData },
+    account: { getUser },
+  }) => ({
+    getlistBaiViet,
+    updateData,
+    getUser,
+  })
 )(Home);

@@ -5,4 +5,6 @@ export const ROLES = {
 export const API = {
   account: "/account",
   post: "/post",
+  like: "/like",
+  comment: "/comment",
 };

@@ -92,10 +92,13 @@ export default ({
       return new Promise((resolve, reject) => {
         if (state[storeName]?._dataEdit?.id) {
           fetchProvider
-            ._put({
-              ...payload,
-              id: state[storeName]?._dataEdit?.id,
-            })
+            ._put(
+              {
+                ...payload,
+                id: state[storeName]?._dataEdit?.id,
+              },
+              state[storeName]?._dataEdit?.id
+            )
             .then((res) => {
               if (res.code === 0) {
                 dispatch[storeName].updateData({

@@ -13,6 +13,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
     showHistory: false,
     searchStr: "",
   });
+  console.log(auth,'auth');
 
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));

@@ -29,9 +29,6 @@ const timeFromNow = (fromDate, format) => {
   const nm = now.getMinutes();
   const ns = now.getSeconds();
 
-  console.log(ny, nM, nd, nh, nm, ns, "n",date);
-  console.log(fy, fM, fd, fh, fm, fs, "f",now);
-
   if (ny - fy > 0) return `${ny - fy} năm trước`;
   if (nM - fM > 0) return `${nM - fM} tháng trước`;
   if (nd - fd > 0) return `${nd - fd} ngày trước`;
