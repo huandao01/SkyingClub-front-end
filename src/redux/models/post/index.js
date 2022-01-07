@@ -6,5 +6,14 @@ export default {
     fetchProvider,
     storeName: "post",
     title: "Bài viết",
+    customEffect: ({ dispatch }) => ({
+      updatePost: (payload, state) => {
+        const listData = Object.assign([], state.post._listData);
+        const index = listData.findIndex((item) => item.id === payload.id);
+        listData[index] = payload;
+
+        dispatch.post.updateData({ _listData: listData });
+      },
+    }),
   }),
 };

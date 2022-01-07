@@ -20,7 +20,7 @@ export default {
         for (let i = 0; i < listHistory.length; i++) {
           set.add(listHistory[i]);
         }
-        newHistory = Array.from(set);
+        newHistory = Array.from(set).filter((item) => item != "");
       }
 
       dispatch.cache.updateData({

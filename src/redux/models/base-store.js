@@ -90,14 +90,14 @@ export default ({
     },
     _createOrEdit: (payload = {}, state) => {
       return new Promise((resolve, reject) => {
-        if (state[storeName]?._dataEdit?.id) {
+        if (state[storeName]?._dataEdit?.id || payload.id) {
           fetchProvider
             ._put(
               {
                 ...payload,
-                id: state[storeName]?._dataEdit?.id,
+                id: state[storeName]?._dataEdit?.id || payload.id,
               },
-              state[storeName]?._dataEdit?.id
+              state[storeName]?._dataEdit?.id || payload.id
             )
             .then((res) => {
               if (res && res.code === 0) {

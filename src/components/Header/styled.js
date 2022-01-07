@@ -83,7 +83,19 @@ export const WrapperStyled = styled.a`
     z-index: 1;
     width: 600px;
     height: 100%;
+  }
+
+  .input-search {
     position: relative;
+    .btn-search {
+      position: absolute;
+      right: 4px;
+      top: 9px;
+      background-color: #1890ff;
+      border-radius: 3px;
+      padding: 5px;
+      color: white;
+    }
   }
   .header__search-input {
     height: 40px;
@@ -172,6 +184,8 @@ export const WrapperStyled = styled.a`
       .header__navbar-user-img {
         border-radius: 50%;
         border: 1px solid #e1e1e1;
+        width: 30px;
+        height: 30px;
       }
 
       .header__navbar-user-name {
@@ -195,7 +209,7 @@ export const WrapperStyled = styled.a`
 
         .header__navbar-user-menu-link {
           padding: 15px 15px 15px 0;
-          a {
+          span {
             display: block;
             text-decoration: none;
             color: #333;

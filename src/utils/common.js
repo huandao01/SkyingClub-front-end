@@ -1,3 +1,6 @@
+import { getState } from "@src/redux";
+import clientUtils from "./client-utils";
+
 const combineUrlParams = (url = "", params = {}) => {
   const keys = Object.keys(params);
   const paramUrl = keys
@@ -35,6 +38,12 @@ const timeFromNow = (fromDate, format) => {
   if (nh - fh > 0) return `${nh - fh} giờ trước`;
   if (nm - fm > 0) return `${nm - fm} phút trước`;
   if (ns - fs > 0) return `${ns - fs} giây trước`;
+};
+
+export const getImg = (avatar) => {
+  return avatar
+    ? `${clientUtils.serverApi}/files/${avatar}`
+    : "https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn";
 };
 
 export { combineUrlParams, timeFromNow };

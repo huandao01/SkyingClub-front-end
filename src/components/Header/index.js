@@ -1,19 +1,21 @@
-import { Spin, Tooltip } from "antd";
+import { Button, Spin, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import ModalProfile from "../ModalProfile";
 import { routes } from "./constant";
 import { dataHistorySearch } from "./data";
 import { WrapperStyled } from "./styled";
+import clientUtils from "@utils/client-utils";
 
 const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
   const [state, _setState] = useState({
     openUserMenu: false,
     loading: false,
     showHistory: false,
+    showProfile: false,
     searchStr: "",
   });
-  console.log(auth,'auth');
 
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -21,15 +23,17 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      if (
-        e.target.className?.indexOf("header__navbar-user") === -1 &&
-        e.target.nodeName != "A"
-      ) {
-        setState({ openUserMenu: false });
-      }
+      if (typeof e.target.className === "string") {
+        if (
+          e.target.className?.indexOf("header__navbar-user") === -1 &&
+          e.target.nodeName != "SPAN"
+        ) {
+          setState({ openUserMenu: false });
+        }
 
-      if (e.target.className?.indexOf("search-history-id") === -1) {
-        setState({ showHistory: false });
+        if (e.target.className?.indexOf("search-history-id") === -1) {
+          setState({ showHistory: false });
+        }
       }
     });
   }, []);
@@ -41,7 +45,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
       if (!isDelete) {
         setState({ loading: true });
         getListPost({
-          content: `${value.replaceAll(" ", "%").toLowerCase()}`,
+          content: `${value.toLowerCase()}`,
         }).finally(() => {
           setState({ loading: false });
         });
@@ -89,16 +93,60 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
           </ul>
           <div className="header__search">
             <div className="header__search-input-wrap">
-              <input
-                type="text"
-                className="header__search-input"
-                placeholder="Nhập để tìm kiếm"
-                onKeyPress={handleSearch}
-                onChange={(e) => setState({ searchStr: e.target.value })}
-                onFocus={() => {
-                  setState({ showHistory: true });
-                }}
-              />
+              <div className="input-search">
+                <input
+                  type="text"
+                  className="header__search-input"
+                  placeholder="Nhập để tìm kiếm"
+                  onKeyPress={handleSearch}
+                  onChange={(e) => setState({ searchStr: e.target.value })}
+                  onFocus={() => {
+                    setState({ showHistory: true });
+                  }}
+                />
+                <div
+                  className="btn-search"
+                  onClick={() => handleSearch(state.searchStr)}
+                >
+                  Tìm kiếm
+                </div>
+                {state.showHistory && (
+                  <div className="header__search-history search-history-id">
+                    <h3 className="header__search-history-heading search-history-id">
+                      Lịch sử tìm kiếm
+                    </h3>
+                    <ul className="header__search-history-list search-history-id">
+                      {historySearch
+                        .filter(
+                          (item) =>
+                            item.indexOf(state.searchStr) != -1 ||
+                            state.searchStr === ""
+                        )
+                        .filter((_, idx) => idx < 6) // chỉ lấy 6 lịch sử
+                        .map((item, index) => (
+                          <li
+                            key={index}
+                            className="header__search-history-item search-history-id"
+                          >
+                            <span
+                              onClick={() => handleSearch(item)}
+                              className="search-history-id"
+                              style={{ width: "100%" }}
+                            >
+                              {item}
+                            </span>
+                            <Tooltip title="Xóa">
+                              <i
+                                className="fa fa-times search-history-id"
+                                onClick={() => handleSearch(item, true)}
+                              />
+                            </Tooltip>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
               {state.loading && (
                 <Spin
                   size="large"
@@ -109,42 +157,6 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                     zIndex: 2,
                   }}
                 />
-              )}
-              {state.showHistory && (
-                <div className="header__search-history search-history-id">
-                  <h3 className="header__search-history-heading search-history-id">
-                    Lịch sử tìm kiếm
-                  </h3>
-                  <ul className="header__search-history-list search-history-id">
-                    {historySearch
-                      .filter(
-                        (item) =>
-                          item.indexOf(state.searchStr) != -1 ||
-                          state.searchStr === ""
-                      )
-                      .filter((_, idx) => idx < 6) // chỉ lấy 6 lịch sử
-                      .map((item, index) => (
-                        <li
-                          key={index}
-                          className="header__search-history-item search-history-id"
-                        >
-                          <span
-                            onClick={() => handleSearch(item)}
-                            className="search-history-id"
-                            style={{ width: "100%" }}
-                          >
-                            {item}
-                          </span>
-                          <Tooltip title="Xóa">
-                            <i
-                              className="fa fa-times search-history-id"
-                              onClick={() => handleSearch(item, true)}
-                            />
-                          </Tooltip>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
               )}
             </div>
           </div>
@@ -157,7 +169,11 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                 }}
               >
                 <img
-                  src="https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn"
+                  src={
+                    auth.avatar
+                      ? `${clientUtils.serverApi}/files/${auth.avatar}`
+                      : "https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn"
+                  }
                   alt=""
                   className="header__navbar-user-img"
                 />
@@ -166,17 +182,22 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                 </span>
                 {state.openUserMenu && (
                   <ul className="header__navbar-user-menu-list">
-                    <li className="header__navbar-user-menu-link">
-                      <a href="">Tài Khoản của tôi</a>
+                    <li
+                      className="header__navbar-user-menu-link"
+                      onClick={() => {
+                        setState({ showProfile: true });
+                      }}
+                    >
+                      <span>Tài Khoản của tôi</span>
                     </li>
                     <li
                       className="header__navbar-user-menu-link"
                       onClick={_logout}
                     >
-                      <a href="">Đăng xuất</a>
+                      <span>Đăng xuất</span>
                     </li>
                     <li className="header__navbar-user-menu-link header__navbar-user-menu-link-help">
-                      <a href="">Trợ giúp</a>
+                      <span>Trợ giúp</span>
                     </li>
                   </ul>
                 )}
@@ -194,6 +215,14 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
           </div>
         </nav>
       </header>
+
+      {state.showProfile && (
+        <ModalProfile
+          onCancel={() => {
+            setState({ showProfile: false });
+          }}
+        />
+      )}
     </WrapperStyled>
   );
 };

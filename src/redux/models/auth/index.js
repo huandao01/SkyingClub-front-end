@@ -31,7 +31,6 @@ export default {
         authProvider
           .register(payload)
           .then((s) => {
-            localStorage.setItem("auth", JSON.stringify(s?.data));
             dispatch.auth.updateData({
               auth: s?.data,
             });
@@ -72,6 +71,13 @@ export default {
         auth: null,
       });
       window.location.href = "/auth/login";
+    },
+    updateAuth: ({ email, full_name, avatar }, state) => {
+      const auth = { ...state.auth?.auth, email, full_name, avatar };
+      dispatch.auth.updateData({
+        auth,
+      });
+      localStorage.setItem("auth", JSON.stringify(auth));
     },
   }),
 };

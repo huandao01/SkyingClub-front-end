@@ -1,9 +1,11 @@
 import clientUtils from "@src/utils/client-utils";
-import { timeFromNow } from "@src/utils/common";
-import { Tooltip } from "antd";
+import { getImg, timeFromNow } from "@src/utils/common";
+import { Button, message, Tooltip } from "antd";
 import moment from "moment";
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import InputComment from "./input-comment";
 import { WrapperStyled } from "./styled";
 
 const Post = ({
@@ -18,6 +20,7 @@ const Post = ({
   imgPath,
   createdBy,
   isLike,
+  avatar,
 
   auth,
   onEdit,
@@ -25,12 +28,22 @@ const Post = ({
   deleteLike,
   onLike,
   listUser = [],
+  createComment,
+  deleteComment,
+  getListComment,
+  updatePost,
 }) => {
-  const [state, _setstate] = useState({ showMenu: false });
+  const [state, _setstate] = useState({
+    showMenu: false,
+    listComment: [],
+    isClickComment: false,
+  });
   const setState = (data) => {
     _setstate((pre) => ({ ...pre, ...data }));
   };
+  const history = useHistory();
   const refTimeout = useRef();
+  const refComment = useRef();
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
@@ -41,6 +54,14 @@ const Post = ({
   }, []);
 
   const handleLike = () => {
+    if (!auth?.userId) {
+      message.info("Vui lòng đăng nhập hệ thống");
+      setTimeout(() => {
+        history.push("/auth/login");
+      }, 2000);
+
+      return;
+    }
     onLike({ isLike: !isLike, postId: id });
     if (refTimeout.current) {
       clearTimeout(refTimeout.current);
@@ -55,34 +76,92 @@ const Post = ({
     }, 1000);
   };
 
+  const upComment = (input) => {
+    updatePost({
+      id,
+      content,
+      author,
+      timestamp,
+      createdAt,
+      imgUrl,
+      numberLike,
+      numberComment: numberComment + input,
+      imgPath,
+      createdBy,
+      isLike,
+    });
+  };
+  const showComment = (forceCall) => {
+    if (state.isClickComment && !forceCall) return;
+    getListComment({
+      page: 0,
+      size: 99,
+      userId: auth?.userId,
+      postId: id,
+    }).then((res) => {
+      if (res && res.code === 0) {
+        setState({ isClickComment: true, listComment: res.data });
+      }
+    });
+  };
+
+  const handleComment = () => {
+    if (refComment.current?.getValue()?.length === 0) {
+      message.error("Nội dung không được để trống");
+      return;
+    }
+    createComment({
+      userId: auth?.userId,
+      postId: id,
+      content: refComment.current?.getValue(),
+    }).then((res) => {
+      if (res && res.code === 0) {
+        showComment(true);
+        upComment(1);
+        if (refComment.current) {
+          refComment.current.reset();
+        }
+      }
+    });
+  };
+
+  const handleDeleteComment = (commentId) => {
+    deleteComment(commentId).then((res) => {
+      if (res && res.code === 0) {
+        const newListComment = Object.assign([], state.listComment);
+        setState({
+          listComment: newListComment.filter((item) => item.id != commentId),
+        });
+        upComment(-1);
+      }
+    });
+  };
+
   return (
     <WrapperStyled>
       <div className="container__body--main-framepost">
         <div className="container__body--main-framepost-header">
           <div className="container__body--main-frame-header">
-            <img
-              src="https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn"
-              alt=""
-              className="frame-header-avt"
-            />
+            <img src={getImg(avatar)} alt="" className="frame-header-avt" />
             <ul className="container__body--main-frame-headerNT">
               <li className="frame-header-name">{author}</li>
               <li className="frame-header-time">{timeFromNow(createdAt)}</li>
             </ul>
           </div>
           <div className="sidebar">
-            <label
-              onClick={() => {
-                setState({ showMenu: true });
-              }}
-            >
-              <i className="container__body--main-frame-header-menu fa fa-ellipsis-h"></i>
-            </label>
-
+            {auth?.userId && (
+              <label
+                onClick={() => {
+                  setState({ showMenu: true });
+                }}
+              >
+                <i className="container__body--main-frame-header-menu fa fa-ellipsis-h"></i>
+              </label>
+            )}
             {state.showMenu && (
               <div className="sidebar_menu post-menu-id">
                 <ul className="sidebar_menu-list post-menu-id">
-                  {auth.userId === createdBy && (
+                  {auth?.userId === createdBy && (
                     <li
                       onClick={onEdit}
                       className="sidebar_menu-item post-menu-id"
@@ -143,13 +222,65 @@ const Post = ({
               Yêu thích
             </span>
           </div>
-          <div className="container__framepost-action-cmt">
+          <div
+            className="container__framepost-action-cmt"
+            onClick={showComment}
+          >
             <i className="container__framepost-action-cmt-icon fa fa-comments"></i>
             <span className="container__framepost-action-cmt-btn">
               Bình luận
             </span>
           </div>
         </div>
+        {state.isClickComment && auth?.userId && (
+          <div className="input-comment">
+            <div className="left-comment">
+              <div className="avatar">
+                <img
+                  src={getImg(auth.avatar)}
+                  alt=""
+                  className="frame-header-avt"
+                />
+              </div>
+              <div className="comment-input">
+                <InputComment ref={refComment} />
+              </div>
+            </div>
+            <div>
+              <Button type="primary" onClick={handleComment}>
+                Đăng
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {(state.listComment || []).map((item) => (
+          <div className="comment">
+            <div className="avatar">
+              <img
+                src={getImg(item.avatar)}
+                alt=""
+                className="frame-header-avt"
+              />
+            </div>
+            <div className="comment-item">
+              <span>
+                <span className="comment-username">{item.fullName}</span>
+              </span>
+              <div>
+                <div className="content-comment">{item.content}</div>
+              </div>
+            </div>
+            {auth?.userId && auth?.userId === item.userId && (
+              <Tooltip title="Gỡ bình luận">
+                <i
+                  className="fa fa-times delete-comment"
+                  onClick={() => handleDeleteComment(item.id)}
+                />
+              </Tooltip>
+            )}
+          </div>
+        ))}
       </div>
     </WrapperStyled>
   );
@@ -165,6 +296,11 @@ export default connect(
     cache: { saveHistory },
     post: { _getList: getListPost, updatePost },
     like: { createLike, deleteLike, onLike },
+    comment: {
+      _createOrEdit: createComment,
+      _getList: getListComment,
+      _onDelete: deleteComment,
+    },
   }) => ({
     _logout,
     saveHistory,
@@ -173,5 +309,8 @@ export default connect(
     createLike,
     deleteLike,
     onLike,
+    createComment,
+    deleteComment,
+    getListComment,
   })
 )(Post);

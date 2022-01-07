@@ -108,6 +108,7 @@ export const WrapperStyled = styled.div`
     align-items: center;
     justify-content: space-around;
     padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
   }
 
   .container__framepost-action-like {
@@ -142,5 +143,60 @@ export const WrapperStyled = styled.div`
   .container__framepost-action-cmt-d {
     font-size: 1.45rem;
     margin-left: 2px;
+  }
+
+  .comment {
+    color: black;
+    padding: 6px 15px;
+    display: flex;
+    .avatar {
+      margin-right: 5px;
+    }
+    .comment-item {
+      background-color: #f0f2f5;
+      border-radius: 15px;
+      text-align: left;
+      padding: 5px 15px;
+      max-width: calc(100% - 90px);
+      .comment-username {
+        font-size: 13px;
+        font-weight: bold;
+        color: black;
+      }
+      .content-comment {
+        white-space: pre;
+      }
+    }
+  }
+
+  .input-comment {
+    color: black;
+    padding: 6px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .comment-input {
+      width: 80%;
+    }
+    .left-comment {
+      display: flex;
+      width: 80%;
+    }
+    textarea {
+      border: none;
+      padding-top: 6px;
+      width: 100%;
+      margin-left: 15px;
+      background-color: #f0f2f5;
+      min-height: 36px;
+      border-radius: 18px;
+      padding-left: 10px;
+      outline: none;
+    }
+  }
+  .delete-comment {
+    margin-left: 15px;
+    padding-top: 16px;
+    cursor: pointer;
   }
 `;

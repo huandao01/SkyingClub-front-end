@@ -4,6 +4,7 @@ import { WrapperStyled } from "./styled";
 import { message } from "antd";
 import fileProvider from "@src/data-access/file-provider";
 import clientUtils from "@src/utils/client-utils";
+import { getImg } from "@src/utils/common";
 
 const ModalCreatePost = ({
   auth,
@@ -56,7 +57,7 @@ const ModalCreatePost = ({
           </div>
           <div className="modal-container-avt">
             <img
-              src="https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn"
+              src={getImg(auth.avatar)}
               alt=""
               className="modal-container-avt-img"
             />
