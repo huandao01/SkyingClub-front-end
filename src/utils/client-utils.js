@@ -3,7 +3,7 @@ export const UrlServer = () => {
   const localhost = true;
 
   switch (domain) {
-    case "http://45.13.132.247:3000": // server host
+    case "http://45.13.132.247:1234": // server host
       return "http://45.13.132.247:8082";
     case "http://localhost:3000": // localhost
       return localhost ? "http://localhost:8082" : "http://45.13.132.247:8082";
