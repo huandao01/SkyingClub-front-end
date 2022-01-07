@@ -47,7 +47,10 @@ const Post = ({
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      if (e.target.className?.indexOf("post-menu-id") === -1) {
+      if (
+        typeof e.target.className === "string" &&
+        e.target.className?.indexOf("post-menu-id") === -1
+      ) {
         setState({ showMenu: false });
       }
     });
