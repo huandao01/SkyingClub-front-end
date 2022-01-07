@@ -96,7 +96,7 @@ const Post = ({
     getListComment({
       page: 0,
       size: 99,
-      userId: auth?.userId,
+      // userId: auth?.userId,
       postId: id,
     }).then((res) => {
       if (res && res.code === 0) {
@@ -149,7 +149,7 @@ const Post = ({
             </ul>
           </div>
           <div className="sidebar">
-            {auth?.userId && (
+            {auth?.userId && auth?.userId === createdBy && (
               <label
                 onClick={() => {
                   setState({ showMenu: true });
@@ -160,17 +160,17 @@ const Post = ({
             )}
             {state.showMenu && (
               <div className="sidebar_menu post-menu-id">
-                <ul className="sidebar_menu-list post-menu-id">
-                  {auth?.userId === createdBy && (
+                {auth?.userId === createdBy && (
+                  <ul className="sidebar_menu-list post-menu-id">
                     <li
                       onClick={onEdit}
                       className="sidebar_menu-item post-menu-id"
                     >
                       Sửa bài
                     </li>
-                  )}
-                  <li className="sidebar_menu-item post-menu-id">Xóa bài</li>
-                </ul>
+                    <li className="sidebar_menu-item post-menu-id">Xóa bài</li>
+                  </ul>
+                )}
               </div>
             )}
           </div>
