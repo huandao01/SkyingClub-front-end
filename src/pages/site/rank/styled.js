@@ -40,5 +40,18 @@ export const WrapperStyled = styled.div`
         }
       }
     }
+
+    .ant-table-thead {
+      tr {
+        th {
+          padding: 10px;
+          background-color: #e9eff7;
+          color: #555;
+          font-size: 14px;
+          font-weight: bold;
+          text-align: center !important;
+        }
+      }
+    }
   }
 `;

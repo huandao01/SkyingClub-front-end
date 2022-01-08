@@ -40,7 +40,7 @@ export default {
             .then((val) => {
               if (val.code === 401) {
                 // localStorage.clear();
-                // window.location.href = "/auth/login";
+                window.location.href = "/auth/login";
               }
               resolve(val);
             })
