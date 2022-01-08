@@ -12,7 +12,8 @@ export default (API = "") => ({
             size,
             ...param,
           }),
-          {}
+          {},
+          true
         )
         .then((x) => {
           resolve(x);
