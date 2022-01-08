@@ -19,7 +19,7 @@ export const routes = [
   },
   {
     title: "Bảng xếp hạng",
-    // path: "/skyingclub/rank",
+    path: "/skyingclub/rank",
   },
   {
     title: "Cửa hàng",
