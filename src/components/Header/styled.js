@@ -8,6 +8,7 @@ export const WrapperStyled = styled.a`
     background-color: rgb(80, 122, 196);
     position: fixed;
     z-index: 1;
+    top: 0;
   }
   .header__navbar {
     display: flex;

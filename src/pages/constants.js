@@ -4,6 +4,8 @@ import React, { Suspense } from "react";
 // home page
 const Home = React.lazy(() => import("@pages/site/home"));
 const Shop = React.lazy(() => import("@pages/site/shop"));
+const Sport = React.lazy(() => import("@pages/site/sport"));
+const Rank = React.lazy(() => import("@pages/site/rank"));
 
 // authentication
 const Login = React.lazy(() => import("@pages/auth/login"));
@@ -32,6 +34,18 @@ export const route_home_page = [
     component: Page(Shop, []),
     accessRoles: [],
     path: ["/skyingclub/shop"],
+    exact: true,
+  },
+  {
+    component: Page(Sport, []),
+    accessRoles: [],
+    path: ["/skyingclub/sport"],
+    exact: true,
+  },
+  {
+    component: Page(Rank, []),
+    accessRoles: [],
+    path: ["/skyingclub/rank"],
     exact: true,
   },
 ];
