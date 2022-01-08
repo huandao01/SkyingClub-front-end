@@ -16,7 +16,7 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
 
   useEffect(() => {
     getlistBaiViet({});
-    getUser();
+    // getUser();
   }, []);
 
   return (

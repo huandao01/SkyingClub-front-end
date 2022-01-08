@@ -70,7 +70,7 @@ export default {
       dispatch.auth.updateData({
         auth: null,
       });
-      window.location.href = "/auth/login";
+      window.location.href = "/";
     },
     updateAuth: ({ email, full_name, avatar }, state) => {
       const auth = { ...state.auth?.auth, email, full_name, avatar };
