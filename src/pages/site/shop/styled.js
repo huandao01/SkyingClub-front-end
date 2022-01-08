@@ -947,6 +947,7 @@ export const WrapperStyled = styled.div`
     position: fixed;
     bottom: 10px;
     right: 50px;
+    cursor: pointer;
     .card-fixed {
       width: 50px;
       height: 50px;
@@ -2365,6 +2366,74 @@ export const WrapperStyled = styled.div`
 
     .wide .l-o-11 {
       margin-left: 91.66667%;
+    }
+  }
+`;
+
+export const StyledGioHang = styled.div`
+  .list-product {
+    .item {
+      display: flex;
+      align-items: baseline;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+
+      .img {
+        width: 15%;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .name-product {
+        width: 30%;
+      }
+      .price {
+        width: 20%;
+      }
+      .number {
+        width: 30%;
+        display: flex;
+
+        .number-count {
+          width: 60%;
+        }
+        .input {
+          width: 30%;
+          input {
+            width: 100%;
+            outline: none;
+          }
+        }
+      }
+      .btn-delete {
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .btn-del {
+          cursor: pointer;
+          background-color: #eb5757;
+          color: white;
+          font-weight: bold;
+          padding: 2px 10px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+  .total {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    span {
+      margin-right: 10px;
+    }
+    span:last-child {
+      font-size: 18px;
     }
   }
 `;

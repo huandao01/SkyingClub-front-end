@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import GioHang from "./component/gio-hang";
 import Product from "./component/product";
 import { data } from "./data";
 import { WrapperStyled } from "./styled";
 
 const Shop = ({ listAdd = [] }) => {
+  const [state, _setState] = useState({ showBill: false });
+  const setState = (data) => {
+    _setState((pre) => ({ ...pre, ...data }));
+  };
+
   return (
     <WrapperStyled>
       <div className="app">
@@ -153,7 +159,7 @@ const Shop = ({ listAdd = [] }) => {
                   <div className="select-input">
                     <span className="select-input__label">Giá</span>
                     <i className="select-input__icon fas fa-angle-down"></i>
-                    <ul className="select-input__list">
+                    <ul style={{ top: 40 }} className="select-input__list">
                       <li className="select-input__item">Giá: Thấp đến cao</li>
                       <li className="select-input__item">Giá: Cao đến thấp</li>
                     </ul>
@@ -563,7 +569,7 @@ const Shop = ({ listAdd = [] }) => {
         </div>
       </div>
 
-      <div className="buy-bottom">
+      <div className="buy-bottom" onClick={() => setState({ showBill: true })}>
         <div className="card-fixed">
           <i className="header__cart-icon fas fa-shopping-cart"></i>
           <span className="header__cart-wrap-notice" id="number_select">
@@ -571,6 +577,10 @@ const Shop = ({ listAdd = [] }) => {
           </span>
         </div>
       </div>
+
+      {state.showBill && (
+        <GioHang onCancel={() => setState({ showBill: false })} />
+      )}
     </WrapperStyled>
   );
 };

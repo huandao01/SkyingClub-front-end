@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Product = ({ data, addProduct }) => {
+const Product = ({ data, addProduct, listAdd }) => {
   const [state, _setState] = useState({ isAdd: false });
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
+
+  const isAdd = listAdd.findIndex((item) => item.id === data.id) != -1;
 
   return (
     <div class="col l-2-4 m-4 c-6">
@@ -47,13 +49,12 @@ const Product = ({ data, addProduct }) => {
             {data.manufactureCountry}
           </span>
           <span
-            class={`home-product-item__brand ${state.isAdd ? "is-add" : ""}`}
+            class={`home-product-item__brand ${isAdd ? "is-add" : ""}`}
             onClick={() => {
-              setState({ isAdd: true });
-              if (!state.isAdd) addProduct(data);
+              if (!isAdd) addProduct(data);
             }}
           >
-            {state.isAdd ? "Đã thêm" : "Mua ngay"}
+            {isAdd ? "Đã thêm" : "Mua ngay"}
           </span>
         </div>
         <div class="product-favourite">
@@ -70,6 +71,6 @@ const Product = ({ data, addProduct }) => {
 };
 
 export default connect(
-  ({}) => ({}),
+  ({ shop: { listAdd } }) => ({ listAdd }),
   ({ shop: { addProduct } }) => ({ addProduct })
 )(Product);
