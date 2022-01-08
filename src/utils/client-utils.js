@@ -1,6 +1,6 @@
 export const UrlServer = () => {
   const domain = global.origin;
-  const localhost = true;
+  const localhost = false;
 
   switch (domain) {
     case "http://45.13.132.247:1234": // server host

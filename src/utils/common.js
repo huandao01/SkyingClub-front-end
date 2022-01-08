@@ -46,4 +46,21 @@ export const getImg = (avatar) => {
     : "https://cf.shopee.vn/file/f00ff3ca6680edb907b53d0fad7d22e8_tn";
 };
 
+Number.prototype.formatPrice = function () {
+  return this.toFixed(2)
+    .replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
+    .replace(".00", "")
+    .replace(/,/g, ".");
+};
+String.prototype.formatPrice = function () {
+  try {
+    return parseInt(this)
+      .toFixed(2)
+      .replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
+      .replace(".00", "")
+      .replace(/,/g, ".");
+  } catch (error) {}
+  return this;
+};
+
 export { combineUrlParams, timeFromNow };

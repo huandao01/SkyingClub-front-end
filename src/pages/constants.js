@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 
 // home page
 const Home = React.lazy(() => import("@pages/site/home"));
+const Shop = React.lazy(() => import("@pages/site/shop"));
 
 // authentication
 const Login = React.lazy(() => import("@pages/auth/login"));
@@ -25,6 +26,12 @@ export const route_home_page = [
     component: Page(Home, []),
     accessRoles: [],
     path: ["/skyingclub/home"],
+    exact: true,
+  },
+  {
+    component: Page(Shop, []),
+    accessRoles: [],
+    path: ["/skyingclub/shop"],
     exact: true,
   },
 ];

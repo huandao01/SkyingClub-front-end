@@ -59,7 +59,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
         <nav className="header__navbar">
           <ul className="header__navbar-list">
             <li className="header__navbar-fun">
-              <Link href="/home" className="header__navbar-fun-link">
+              <Link to="/skyingclub/home" className="header__navbar-fun-link">
                 <i className="header__navbar-fun-home fas fa-home"></i>
                 Skying Club
               </Link>
@@ -68,10 +68,13 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
               if (item.children && item.children?.length > 0) {
                 return (
                   <li key={index} className="header__navbar-fun">
-                    <a href="#" className="header__navbar-fun-link">
+                    <Link
+                      to={item.path || "#"}
+                      className="header__navbar-fun-link"
+                    >
                       {item.title}
                       <i className="header__navbar-fun-link-icon fas fa-chevron-down"></i>
-                    </a>
+                    </Link>
                     <ul className="header__navbar-fun-list">
                       {item.children?.map((child, idx) => (
                         <li key={idx} className="header__navbar-fun-list-link">
@@ -84,9 +87,12 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
               }
               return (
                 <li key={index} className="header__navbar-fun">
-                  <a href="" className="header__navbar-fun-link">
+                  <Link
+                    to={item.path || "#"}
+                    className="header__navbar-fun-link"
+                  >
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

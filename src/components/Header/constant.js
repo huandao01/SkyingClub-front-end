@@ -21,5 +21,6 @@ export const routes = [
   },
   {
     title: "Cửa hàng",
+    path: "/skyingclub/shop"
   },
 ];
