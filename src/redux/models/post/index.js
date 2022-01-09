@@ -6,6 +6,7 @@ export default {
     fetchProvider,
     storeName: "post",
     title: "Bài viết",
+    initState: { size: 20 },
     customEffect: ({ dispatch }) => ({
       updatePost: (payload, state) => {
         const listData = Object.assign([], state.post._listData);

@@ -1,6 +1,6 @@
 import clientUtils from "@src/utils/client-utils";
 import { getImg, timeFromNow } from "@src/utils/common";
-import { Button, message, Tooltip } from "antd";
+import { Button, message, Modal, Popconfirm, Tooltip } from "antd";
 import moment from "moment";
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
@@ -32,6 +32,8 @@ const Post = ({
   deleteComment,
   getListComment,
   updatePost,
+  deletePost,
+  getListPost,
 }) => {
   const [state, _setstate] = useState({
     showMenu: false,
@@ -171,7 +173,14 @@ const Post = ({
                     >
                       Sửa bài
                     </li>
-                    <li className="sidebar_menu-item post-menu-id">Xóa bài</li>
+                    <li
+                      className="sidebar_menu-item post-menu-id"
+                      onClick={() => {
+                        setState({ showPopConfirm: true });
+                      }}
+                    >
+                      Xóa bài
+                    </li>
                   </ul>
                 )}
               </div>
@@ -285,6 +294,22 @@ const Post = ({
           </div>
         ))}
       </div>
+
+      <Modal
+        visible={state.showPopConfirm}
+        cancelText={"Hủy"}
+        okText={"Gỡ bài"}
+        onCancel={() => {
+          setState({ showPopConfirm: false });
+        }}
+        onOk={() => {
+          deletePost(id);
+        }}
+      >
+        <div style={{ textAlign: "center", fontSize: 20, fontWeight: "bold" }}>
+          Bạn có chắc muốn gỡ bài viết
+        </div>
+      </Modal>
     </WrapperStyled>
   );
 };
@@ -297,7 +322,7 @@ export default connect(
   ({
     auth: { _logout },
     cache: { saveHistory },
-    post: { _getList: getListPost, updatePost },
+    post: { _getList: getListPost, _onDelete: deletePost, updatePost },
     like: { createLike, deleteLike, onLike },
     comment: {
       _createOrEdit: createComment,
@@ -315,5 +340,6 @@ export default connect(
     createComment,
     deleteComment,
     getListComment,
+    deletePost,
   })
 )(Post);
