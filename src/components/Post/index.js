@@ -154,25 +154,28 @@ const Post = ({
             </ul>
           </div>
           <div className="sidebar">
-            {auth?.userId && auth?.userId === createdBy && (
-              <label
-                onClick={() => {
-                  setState({ showMenu: true });
-                }}
-              >
-                <i className="container__body--main-frame-header-menu fa fa-ellipsis-h"></i>
-              </label>
-            )}
+            {auth?.userId &&
+              (auth?.userId === createdBy || auth?.role === "ROLE_1") && (
+                <label
+                  onClick={() => {
+                    setState({ showMenu: true });
+                  }}
+                >
+                  <i className="container__body--main-frame-header-menu fa fa-ellipsis-h"></i>
+                </label>
+              )}
             {state.showMenu && (
               <div className="sidebar_menu post-menu-id">
-                {auth?.userId === createdBy && (
+                {(auth?.userId === createdBy || auth?.role === "ROLE_1") && (
                   <ul className="sidebar_menu-list post-menu-id">
-                    <li
-                      onClick={onEdit}
-                      className="sidebar_menu-item post-menu-id"
-                    >
-                      Sửa bài
-                    </li>
+                    {auth?.userId === createdBy && (
+                      <li
+                        onClick={onEdit}
+                        className="sidebar_menu-item post-menu-id"
+                      >
+                        Sửa bài
+                      </li>
+                    )}
                     <li
                       className="sidebar_menu-item post-menu-id"
                       onClick={() => {
