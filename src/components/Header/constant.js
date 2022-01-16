@@ -22,6 +22,12 @@ export const routes = [
     path: "/skyingclub/rank",
   },
   {
+    role: "ROLE_1",
+    title: "Cửa hàng",
+    path: "/admin/bill",
+  },
+  {
+    ignore: "ROLE_1",
     title: "Cửa hàng",
     path: "/skyingclub/shop",
   },

@@ -4,6 +4,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Auth from "./auth";
+import Admin from "./admin";
 import { theme } from "./constants";
 import Site from "./site";
 
@@ -17,6 +18,7 @@ const App = (props) => {
       <ConfigProvider locale={viVN}>
         <Switch>
           <Route path={"/skyingclub"} component={Site} />
+          <Route path={"/admin"} component={Admin} />
           <Route path={"/auth"} component={Auth} />
           {/* <Route path={"/"} component={Site} /> */}
           <Redirect path="/" to={"/skyingclub/home"} />
