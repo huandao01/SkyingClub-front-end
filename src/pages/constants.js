@@ -11,6 +11,9 @@ const Rank = React.lazy(() => import("@pages/site/rank"));
 const Login = React.lazy(() => import("@pages/auth/login"));
 const Register = React.lazy(() => import("@pages/auth/register"));
 
+// admin
+const Bill = React.lazy(() => import("@pages/admin/bill"));
+
 const Page =
   (Component, roles = []) =>
   (props) => {
@@ -61,6 +64,15 @@ export const route_auth = [
     component: Page(Register, []),
     accessRoles: [],
     path: ["/auth/register"],
+    exact: true,
+  },
+];
+
+export const route_admin = [
+  {
+    component: Page(Bill, []),
+    accessRoles: [],
+    path: ["/admin/bill"],
     exact: true,
   },
 ];
