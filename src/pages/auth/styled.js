@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const WrapperStyled = styled.div`
-  background: url(${require("@images/bg-auth.jpg").default}) no-repeat center
+  background: url(${require("@images/Capture.PNG").default}) no-repeat center
     top;
   background-size: cover;
   -webkit-background-size: cover;
@@ -99,7 +99,7 @@ export const WrapperStyled = styled.div`
   }
   span.icon1,
   span.icon2 {
-    color: #ea2858;
+    color: #047af6;
     font-size: 1.1em;
     position: absolute;
     right: 6%;
@@ -112,7 +112,7 @@ export const WrapperStyled = styled.div`
   }
   .sub-main-w3 input[type="submit"] {
     color: white;
-    background: #ea2858;
+    background: #047af6;
     border: none;
     padding: 0.7em 0;
     outline: none;
