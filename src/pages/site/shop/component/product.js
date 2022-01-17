@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Product = ({ data, addProduct, listAdd }) => {
+const Product = ({ data, addProduct, listAdd  }) => {
   const [state, _setState] = useState({ isAdd: false });
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -14,18 +14,18 @@ const Product = ({ data, addProduct, listAdd }) => {
     <div class="col l-2-4 m-4 c-6">
       <Link
         to="#"
-        // href="product-info.html?id=${pageProduct.id}"
+       href="product-info.html?id=${pageProduct.id}"
         id={data.id}
         class="home-product-item"
       >
         <img src={data.img} class="home-product-item__img" />
         <div class="home-product-item__name"> {data.name} </div>
         <div class="home-product-item__price">
-          <span class="home-product-item__price-old">
-            {data.oldPrice?.formatPrice()}đ
+          <span class="home-product-item__price-current">
+            {data.content}  
           </span>
           <span class="home-product-item__price-current">
-            {data.newPrice?.formatPrice()}đ
+            {data.price?.formatPrice()}đ
           </span>
         </div>
         <div class="home-product-item__action">
@@ -41,7 +41,7 @@ const Product = ({ data, addProduct, listAdd }) => {
             <i class="fas fa-star"></i>
           </div>
           <span class="home-product-item__sold">
-            {data.numberSell + " đã bán"}
+          {data.numberProductAvailable} có sẵn
           </span>
         </div>
         <div class="home-product-item__origin">
@@ -62,8 +62,8 @@ const Product = ({ data, addProduct, listAdd }) => {
           <span> Yêu thích </span>
         </div>
         <div class="product-sale-off">
-          <span class="product-sale-off__percent"> {data.per}% </span>
-          <span class="product-sale-off__label"> GIẢM </span>
+          <span class="product-sale-off__percent"> New </span>
+          <span class="product-sale-off__label">  </span>
         </div>
       </Link>
     </div>

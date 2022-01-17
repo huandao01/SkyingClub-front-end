@@ -13,16 +13,25 @@ export const WrapperStyled = styled.div`
     padding: 0 30px;
     text-align: center;
   }
+  .title-project {
+    margin: 20px;
+    font-size: 35px;
+    font-weight: 700;
+    padding: 0 30px;
+    text-align: center;
+  }
   .list-rank {
     margin: 0 15%;
     background-color: white;
     padding: 10px 20px;
     td {
       font-size: 18px;
+      text-align: center !important;
     }
     .full-name {
       display: flex;
       align-items: center;
+      text-align: center !important;
       .avatar {
         margin-right: 20px;
         img {
@@ -35,6 +44,7 @@ export const WrapperStyled = styled.div`
     td {
       &.point {
         color: crimson;
+        text-align: center !important;
         span {
           font-size: 15px;
         }

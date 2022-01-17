@@ -9,6 +9,7 @@ const Sport = ({listEvent = [], getEvent}) => {
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
+ 
 //  goij API
   useEffect(()=>{
     getEvent({page: 0, site : 10})

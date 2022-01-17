@@ -100,7 +100,7 @@ const Post = ({
     if (state.isClickComment && !forceCall) return;
     getListComment({
       page: 0,
-      size: 99,
+      size: 99, 
       // userId: auth?.userId,
       postId: id,
     }).then((res) => {

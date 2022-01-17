@@ -9,5 +9,7 @@ export const API = {
   comment: "/comment",
   event: "/event",
   participant: "/participant",
-  user: "/user"
+  user: "/user",
+  product: "/product",
+  bill: "/bill"
 };

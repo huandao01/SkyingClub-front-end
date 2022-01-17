@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { StyledGioHang } from "../styled";
+import billProvider from "@src/data-access/bill-provider";
 
 const StyledFooter = styled.div`
   .footer-list-product {
@@ -32,6 +33,7 @@ const GioHang = ({
   changeProduct,
   deleteProduct,
   onCreate,
+  auth,
 }) => {
   return (
     <Modal
@@ -55,9 +57,17 @@ const GioHang = ({
               <div
                 className="btn-footer btn-ok"
                 onClick={() => {
-                  message.success("Đặt đơn thành công");
-                  onCancel();
-                  onCreate();
+                  for(let i = 0 ; i < listAdd.length; i++) {
+                    billProvider._post({accountId : auth.userId, productId : listAdd[i].id, numberProduct: listAdd[i].soLuong,
+                      totalCost: listAdd[i].price * listAdd[i].soLuong}).then(
+                     res => {
+                       if(res && res.code === 0 ) {
+                        message.success("Đặt hàng thành công");
+                       }
+                     }
+                   )
+                  }
+                  
                 }}
               >
                 Xác nhận
@@ -80,7 +90,7 @@ const GioHang = ({
 
               <div className="name-product">{item.name}</div>
               <div className="price">
-                {(item.newPrice * item.soLuong)?.formatPrice()}đ
+                {(item.price * item.soLuong)?.formatPrice()}đ
               </div>
               <div className="number">
                 <span className="number-count">Số lượng:</span>
@@ -112,7 +122,7 @@ const GioHang = ({
             <span>Tổng tiền: </span>
             <span>
               {listAdd
-                .reduce((acc, cur) => acc + cur.soLuong * cur.newPrice, 0)
+                .reduce((acc, cur) => acc + cur.soLuong * cur.price, 0)
                 .formatPrice()}
             </span>
           </div>
@@ -123,7 +133,7 @@ const GioHang = ({
 };
 
 export default connect(
-  ({ shop: { listAdd } }) => ({ listAdd }),
+  ({ shop: { listAdd }, auth: {auth} }) => ({ listAdd, auth }),
   ({ shop: { updateData, changeProduct, deleteProduct, onCreate } }) => ({
     updateData,
     changeProduct,

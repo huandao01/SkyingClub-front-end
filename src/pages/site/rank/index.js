@@ -1,10 +1,10 @@
-import participantProvider from "@src/data-access/participant-provider";
 import { getImg } from "@src/utils/common";
 import { Badge, Table, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { rank } from "./data";
 import { WrapperStyled } from "./styled";
+import userProvider from "@src/data-access/user-provider";
 
 const Sport = ({ _listData = [], _getList, updateData }) => {
   const [state, _setState] = useState({ showBill: false });
@@ -13,7 +13,7 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
   };
 
   useEffect(() => {
-    participantProvider._search({size : 10}).then(res => {
+    userProvider._search({size : 10}).then(res => {
       if(res && res.code === 0) {
         setState({_listData: res.data})
       }
@@ -23,6 +23,7 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
   const column = [
     {
       title: "STT",
+      className: "td",
       key: "stt",
       render: (_, __, idx) => idx + 1,// tham soso 1 : lấy giá trị của  trường dataindex trong object, ts 2: cả object, ts3: chỉ số
     },
@@ -30,28 +31,21 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
       title: "Tên",
       key: "fullName",
       dataIndex: "fullName",
-      width: "40%",
+      width: "30%",
       render: (_, data) => (
         <div className="full-name">
           <div className="avatar">
             <img src={getImg(data.avatar)} />
           </div>
-          <div className="full-name">{data.fullName}</div>
+          <div className="full-name">{data.userName}</div>
         </div>
       ),
     },
     {
       title: "Email",
       key: "email",
-      dataIndex: "email",
-    },
-    {
-      title: "Event",
-      key: "event",
-      render: (value, data) => (
-        <Tag color={"red"} key={data.id}>
-          {data.nameEvent}
-        </Tag>)
+      width: "50%",
+      render: (value, data) => data.email
     },
     {
       title: "Điểm số",
@@ -60,10 +54,11 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
       className: "point",
       render: (item, data) => (
         <Tag color={"red"} key={data.id}>
-          {item}
+          {data.score}
         </Tag>
       ),
     },
+    /*
     {
       title: "Lượt bình chọn",
       render: (_, __, idx) => (
@@ -81,12 +76,14 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
         ></Badge.Ribbon>
       ),
     },
+    */
   ];
 
   return (
     <WrapperStyled>
       <div className="list-rank">
-        <div className="title-page">Bảng xếp hạng thành tích</div>
+        <div className="title-project">SkyingClub</div>
+        <div className="title-page">BẢNG XẾP HẠNG THÀNH TÍCH</div>
         <Table
           dataSource={state._listData}
           columns={column}
