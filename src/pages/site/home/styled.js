@@ -14,6 +14,17 @@ export const WrapperStyled = styled.div`
       transform: translateY(0);
     }
   }
+  .container_list_event {
+    flex: 1;
+
+    margin-top: 5px;
+    text-align: center;
+  }
+  .container_event{
+    width: 300px;
+    height: 200px;
+    margin: 300
+  }
 
   /* Container */
   .container {
@@ -32,14 +43,15 @@ export const WrapperStyled = styled.div`
   }
 
   .container__adver-link {
-    display: block;
+    display: block;  
     text-align: left;
-    margin: 20px 0;
+    margin: 10px 0;
   }
 
   .container__adver-img {
     width: 300px;
-    height: 600px;
+    height: 100%;
+    margin: 300
   }
 
   /* Container product */
@@ -50,15 +62,15 @@ export const WrapperStyled = styled.div`
   .container__product-list {
     position: fixed;
     margin-top: 20px;
-    width: 300px;
+    width: 400px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row-reverse;
-    margin-left: 141px;
+    margin-left: 20px;
   }
 
   .container__product-link {
-    width: 136px;
+    width: 170px;
     height: 202x;
     box-shadow: 0 0.625px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: 3px;
@@ -95,7 +107,7 @@ export const WrapperStyled = styled.div`
   .container__product-buy {
     font-size: 1.1rem;
     color: red;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   /* Container body */

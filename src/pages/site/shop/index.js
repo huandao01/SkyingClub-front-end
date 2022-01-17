@@ -109,11 +109,11 @@ useEffect(()=>{
           <div className="grid wide footer__content">
             <div className="row">
               <div className="col l-2-3 m-3 c-6">
-                <div className="footer__heading">Chăm sóc khách hàng</div>
+                <div className="footer__heading"></div>
                 <ul className="footer-list">
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      Trung tâm trợ giúp
+                      
                     </a>
                   </li>
                   <li className="footer-item">
@@ -123,70 +123,61 @@ useEffect(()=>{
                   </li>
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      Hướng dẫn mua hàng
+               
                     </a>
                   </li>
                 </ul>
               </div>
               <div className="col l-2-3 m-3 c-6">
-                <div className="footer__heading">Giới thiệu</div>
+                
                 <ul className="footer-list">
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      Giới thiệu
+                    
                     </a>
                   </li>
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      Tuyển dụng
+                      
                     </a>
                   </li>
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      Điều khoản
+                      
                     </a>
                   </li>
                 </ul>
               </div>
               <div className="col l-2-3 m-3 c-6">
-                <div className="footer__heading">Danh mục</div>
+                
                 <ul className="footer-list">
                   <li className="footer-item">
-                    <a href="" className="footer-item__link">
-                      Đồ chơi
-                    </a>
+                    
                   </li>
                   <li className="footer-item">
-                    <a href="" className="footer-item__link">
-                      Xe đua
-                    </a>
+                    
                   </li>
                   <li className="footer-item">
-                    <a href="" className="footer-item__link">
-                      Gấu bông
-                    </a>
+                    
                   </li>
                 </ul>
               </div>
               <div className="col l-2-3 m-3 c-6">
-                <div className="footer__heading">Theo dõi chúng tôi</div>
+                
                 <ul className="footer-list">
                   <li className="footer-item">
+                    
+                  </li>
+                  <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      <i className="footer-item__icon fab fa-facebook"></i>
-                      Facebook
+                      
+                
                     </a>
                   </li>
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                      <i className="footer-item__icon fab fa-instagram"></i>
-                      Instagram
-                    </a>
-                  </li>
-                  <li className="footer-item">
-                    <a href="" className="footer-item__link">
-                      <i className="footer-item__icon fab fa-twitter-square"></i>
-                      Twitter
+                     
+                     
                     </a>
                   </li>
                 </ul>

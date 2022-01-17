@@ -21,7 +21,7 @@ useEffect(()=>{
         <div className="item-sport_body">
           <div className="item-sport_background">
             <img
-              src={item.imgPath || require("@assets/images2/sport1.jpg").default}
+              src={item.img || require("@assets/images2/sport1.jpg").default}
             />
           </div>
           <div className="item-sport_content">

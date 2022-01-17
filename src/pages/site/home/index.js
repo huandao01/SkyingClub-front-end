@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { WrapperStyled } from "./styled";
 import "@assets/css/font-awesome.css";
+import CardSport from "./card-sport";
 import { postData, productData } from "./data";
 import Post from "@src/components/Post";
 import ModalCreatePost from "@src/components/ModalCreatePost";
@@ -8,7 +9,7 @@ import { connect } from "react-redux";
 import productProvider from "@src/data-access/product-provider";
 import likeProvider from "@src/data-access/like-provider";
 
-const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listProduct}) => {
+const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listProduct, listEvent, getEvent}) => {
   const [state, _setState] = useState({
     showModalPost: false,
   });
@@ -21,6 +22,7 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
 
   useEffect(() => {
     getlistBaiViet({size:20});
+    getEvent({size: 4});
     // getUser();
   }, []);
 
@@ -30,15 +32,18 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
         <div className="container__product">
           <div className="container__product-list">
             {listProduct.slice(0,6).map((item, index) => (
-                    <div key={index} href="" className="container__product-link">
-                      <img
-                        src={item.imgPath}
-                        alt=""
-                        className="container__product-img"
-                      />
-                      <span className="container__product-title">{item.name}</span>
-                      <span className="container__product-buy">Xem ngay</span>
-                    </div>
+                   <a href="http://localhost:3000/skyingclub/shop" className="container__adver-link">
+                   <div key={index} href="" className="container__product-link">
+                                        <img
+                                          src={item.imgPath}
+                                          alt=""
+                                          className="container__product-img"
+                                        />
+                                        <span className="container__product-title">{item.name}</span>
+                                        <span className="container__product-buy">Xem ngay</span>
+                                      </div>
+                              
+                            </a>
                   ))
             }
           </div>
@@ -70,29 +75,33 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
             )}
           </div>
         </div>
-        <div className="container__adver">
-          <a href="" className="container__adver-link">
-            <img
-              src="https://statics.lotuscdn.vn/thumb_w/300/web/v1/images/lachanviruscorona_right_banner.png"
-              alt=""
-              className="container__adver-img"
-            />
-          </a>
-          <a href="" className="container__adver-link">
-            <img
-              src="https://statics.lotuscdn.vn/thumb_w/300/web/v1/images/lachanviruscorona_right_banner.png"
-              alt=""
-              className="container__adver-img"
-            />
-          </a>
-          <a href="" className="container__adver-link">
-            <img
-              src="https://statics.lotuscdn.vn/thumb_w/300/web/v1/images/lachanviruscorona_right_banner.png"
-              alt=""
-              className="container__adver-img"
-            />
-          </a>
-        </div>
+
+        <div className="container_list_event">
+            {listEvent.slice(0,4).map((item, index) => (
+                   <a href="http://localhost:3000/skyingclub/sport" className="container__adver-link">
+                   <div key={index} href="" className="container__adver-link">
+                                        <img
+                                          src={item.imgPath}
+                                          alt=""
+                                          className="container__adver-img"
+                                        />
+                                        <span className="container__product-title">{item.nameEvent}</span>
+                                        
+                                      </div>
+                              
+                            </a>
+                  ))
+            }
+          </div>
+       
+        {/* <div className="container_list_event">          
+          {listProduct.map((item, idx) => (
+            <div className="container_adver-link">
+              <CardSport key={idx} item={item} />
+              </div>
+          ))}
+          
+        </div>              */}
       </div>
       {state.showModalPost && (
         <ModalCreatePost
@@ -110,18 +119,21 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
   );
 };
 export default connect(
-  ({ auth: { auth }, post: { _listData: listBaiViet }, product: {_listData: listProduct} }) => ({
+  ({ auth: { auth }, post: { _listData: listBaiViet }, product: {_listData: listProduct}, event: {_listData : listEvent} }) => ({
     auth,
     listBaiViet,
     listProduct,
+    listEvent
   }),
   ({
     post: { _getList: getlistBaiViet, updateData },
     account: { getUser },
+    event: {_getList : getEvent}
 
   }) => ({
     getlistBaiViet,
     updateData,
     getUser,
+    getEvent
   })
 )(Home);
