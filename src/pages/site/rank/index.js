@@ -2,28 +2,24 @@ import { getImg } from "@src/utils/common";
 import { Badge, Table, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { rank } from "./data";
 import { WrapperStyled } from "./styled";
-import userProvider from "@src/data-access/user-provider";
 
-const Sport = ({ _listData = [], _getList, updateData }) => {
+
+const Rank = ({ listRank = [],getRank }) => {
   const [state, _setState] = useState({ showBill: false });
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
 
   useEffect(() => {
-    userProvider._search({size : 10}).then(res => {
-      if(res && res.code === 0) {
-        setState({_listData: res.data})
-      }
-    }) 
-  }, []);
+    getRank({page: 0 ,size: 20}) 
+  },[]);  
 
   const column = [
     {
       title: "STT",
       className: "td",
+      width: "10%",
       key: "stt",
       render: (_, __, idx) => idx + 1,// tham soso 1 : lấy giá trị của  trường dataindex trong object, ts 2: cả object, ts3: chỉ số
     },
@@ -31,7 +27,7 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
       title: "Tên",
       key: "fullName",
       dataIndex: "fullName",
-      width: "30%",
+      width: "25%",
       render: (_, data) => (
         <div className="full-name">
           <div className="avatar">
@@ -77,34 +73,31 @@ const Sport = ({ _listData = [], _getList, updateData }) => {
       ),
     },
     */
-  ];
+  ]; 
 
   return (
     <WrapperStyled>
       <div className="list-rank">
         <div className="title-project">SkyingClub</div>
-        <div className="title-page">BẢNG XẾP HẠNG THÀNH TÍCH</div>
+        <div className="title-page">TOP 20 BẢNG XẾP HẠNG THÀNH TÍCH</div>
         <Table
-          dataSource={state._listData}
+          dataSource={listRank}
           columns={column}
           pagination={false}
           footer={false}
         />
-        {/* {rank.map((item, index) => (
-          <div className="item-rank">
-            <div className="item-rank_content">
-              <div className="stt">{index + 1}</div>
-              <div className="full-name">{item.fullName}</div>
-              <div className="point">{item.point}</div>
-            </div>
-          </div>
-        ))} */}
       </div>
     </WrapperStyled>
   );
 };
 
 export default connect(
-  ({ account: { _listData } }) => ({ _listData }),
-  ({ account: { _getList, updateData } }) => ({ _getList, updateData })
-)(Sport);
+  ({ rank: { _listData: listRank } }) => ({
+    listRank
+  }),
+  ({
+     rank: {_getList: getRank}
+  }) => ({
+    getRank
+  })
+)(Rank);

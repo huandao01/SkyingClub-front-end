@@ -84,7 +84,7 @@ const GioHang = ({
             <div className="item">
               <div className="img">
                 <img
-                  src={item.img || require("@assets/images2/food2.jpg").default}
+                  src={item.imgPath || require("@assets/images2/food2.jpg").default}
                 />
               </div>
 

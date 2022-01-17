@@ -18,7 +18,7 @@ const Product = ({ data, addProduct, listAdd  }) => {
         id={data.id}
         class="home-product-item"
       >
-        <img src={data.img} class="home-product-item__img" />
+        <img src={data.imgPath} class="home-product-item__img" />
         <div class="home-product-item__name"> {data.name} </div>
         <div class="home-product-item__price">
           <span class="home-product-item__price-current">

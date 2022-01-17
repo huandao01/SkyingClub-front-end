@@ -19,7 +19,7 @@ export const WrapperStyled = styled.div`
   .container {
     height: 1200px;
     width: 100%;
-    background-color: rgb(249, 249, 249);
+    background-color: white;
     position: absolute;
     margin-top: 50px;
     display: flex;
@@ -94,7 +94,7 @@ export const WrapperStyled = styled.div`
 
   .container__product-buy {
     font-size: 1.1rem;
-    color: #61616a;
+    color: red;
     margin-bottom: 8px;
   }
 

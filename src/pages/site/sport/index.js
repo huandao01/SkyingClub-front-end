@@ -12,20 +12,20 @@ const Sport = ({listEvent = [], getEvent}) => {
  
 //  goij API
   useEffect(()=>{
-    getEvent({page: 0, site : 10})
+    getEvent({page: 0, sizz: 100})
   },[]) 
 
   return (
     <WrapperStyled>
       <div>
-          <div className="title-group">Dữ liệu từ API</div>
+          <div className="title-group">SkyingClub</div>
           <div className="list-sport">
           {listEvent.map((item, idx) => (
               <CardSport key={idx} item={item} />
             ))}
           </div>
         </div>
-       
+       {/*}
       {sport.map((group, index) => (
         <div key={index}>
           <div className="title-group">{group.header}</div>
@@ -36,6 +36,7 @@ const Sport = ({listEvent = [], getEvent}) => {
           </div>
         </div>
       ))}
+            */}
     </WrapperStyled>
   );
 };

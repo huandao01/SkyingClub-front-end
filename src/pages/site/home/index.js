@@ -5,8 +5,10 @@ import { postData, productData } from "./data";
 import Post from "@src/components/Post";
 import ModalCreatePost from "@src/components/ModalCreatePost";
 import { connect } from "react-redux";
+import productProvider from "@src/data-access/product-provider";
+import likeProvider from "@src/data-access/like-provider";
 
-const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
+const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listProduct}) => {
   const [state, _setState] = useState({
     showModalPost: false,
   });
@@ -14,8 +16,11 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
 
+
+ 
+
   useEffect(() => {
-    getlistBaiViet({ size: 20 });
+    getlistBaiViet({size:20});
     // getUser();
   }, []);
 
@@ -24,17 +29,18 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
       <div className="container">
         <div className="container__product">
           <div className="container__product-list">
-            {productData.map((item, index) => (
-              <div key={index} href="" className="container__product-link">
-                <img
-                  src={item.imgUrl}
-                  alt=""
-                  className="container__product-img"
-                />
-                <span className="container__product-title">{item.content}</span>
-                <span className="container__product-buy">Mua ngay</span>
-              </div>
-            ))}
+            {listProduct.slice(0,6).map((item, index) => (
+                    <div key={index} href="" className="container__product-link">
+                      <img
+                        src={item.imgPath}
+                        alt=""
+                        className="container__product-img"
+                      />
+                      <span className="container__product-title">{item.name}</span>
+                      <span className="container__product-buy">Xem ngay</span>
+                    </div>
+                  ))
+            }
           </div>
         </div>
         <div className="container__body">
@@ -104,13 +110,15 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData }) => {
   );
 };
 export default connect(
-  ({ auth: { auth }, post: { _listData: listBaiViet } }) => ({
+  ({ auth: { auth }, post: { _listData: listBaiViet }, product: {_listData: listProduct} }) => ({
     auth,
     listBaiViet,
+    listProduct,
   }),
   ({
     post: { _getList: getlistBaiViet, updateData },
     account: { getUser },
+
   }) => ({
     getlistBaiViet,
     updateData,

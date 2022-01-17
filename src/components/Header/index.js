@@ -60,6 +60,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
           <ul className="header__navbar-list">
             <li className="header__navbar-fun">
               <Link to="/skyingclub/home" className="header__navbar-fun-link">
+              {/* <img height= "48px" src= "/logo.jpg" /> */}
                 <i className="header__navbar-fun-home fas fa-home"></i>
                 Skying Club
               </Link>

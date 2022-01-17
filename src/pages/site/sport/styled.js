@@ -15,12 +15,14 @@ export const WrapperStyled = styled.div`
   .list-sport {
     padding: 0 50px;
     display: flex;
+    flex-wrap: wrap ;
     .list-sport__item {
       width: 25%;
       .item-sport:hover {
         transform: scale(1.1);
       }
       .item-sport {
+        margin: 10px 5px 10px 5px;
         padding: 0 15px;
         transition: all 0.4s;
         transform: scale(1);
