@@ -67,10 +67,9 @@ export const WrapperStyled = styled.div`
     outline: none;
     font-size: 0.9em;
     padding: 1em 3em 1em 1em;
-    border: none;
-    margin-bottom: 0.3em;
-    background: rgba(255, 255, 255, 0.85);
-    width: 82%;
+    border: 1px solid #ccc;
+    background: #fff;
+    width: 100%;
     color: #000;
     border-radius: 30px;
     font-weight: 400;
@@ -82,8 +81,8 @@ export const WrapperStyled = styled.div`
     margin: 10em auto 12em;
   }
   .sub-w3l h6 a {
-    font-size: 0.9em;
-    color: #fff;
+    font-size: 1.2em;
+    color: #e32636;
     letter-spacing: 1px;
     text-align: right;
     display: inherit;

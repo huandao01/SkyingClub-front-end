@@ -148,7 +148,7 @@ const Shop = ({ listAdd = [] }) => {
               </div>
 
               <div className="col l-10 m-12 c-12">
-                <div className="home-filter hide-on-mobile-tablet">
+                {/* <div className="home-filter hide-on-mobile-tablet">
                   <span className="home-filter__label">Sắp xếp theo</span>
                   <button className="home-filter__btn btn">Phổ biến</button>
                   <button className="home-filter__btn btn btn--primary">
@@ -182,7 +182,7 @@ const Shop = ({ listAdd = [] }) => {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <nav className="mobile-category">
                   <ul className="mobile-category__list">
