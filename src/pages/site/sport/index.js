@@ -1,10 +1,11 @@
+import { auth } from "@src/redux/models";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import CardSport from "./components/card-sport";
 import { nhayDu, sport } from "./data";
 import { WrapperStyled } from "./styled";
 
-const Sport = ({listEvent = [], getEvent}) => {
+const Sport = ({auth, listEvent = [], getEvent}) => {
   const [state, _setState] = useState({ showBill: false });
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -19,11 +20,21 @@ const Sport = ({listEvent = [], getEvent}) => {
     <WrapperStyled>
       <div>
           <div className="title-group">SkyingClub</div>
+          {/* Thêm sản giải */}
+          {(auth?.role === "ROLE_1") && (
+                    <div className="btn-add-list" onClick={() => setState({ showBill: true })}>
+
+                    <div className="btn-add">
+                      <i className="btn-add-icon fas fa-plus-circle"></i>
+                    </div>
+                    </div>)}
           <div className="list-sport">
           {listEvent.map((item, idx) => (
               <CardSport key={idx} item={item} />
             ))}
           </div>
+          
+          
         </div>
        {/*}
       {sport.map((group, index) => (
