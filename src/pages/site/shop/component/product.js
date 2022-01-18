@@ -1,3 +1,4 @@
+import { auth } from "@src/redux/models";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -48,6 +49,9 @@ const Product = ({ data, addProduct, listAdd  }) => {
           <span class="home-product-item__origin-name">
             {data.manufactureCountry}
           </span>
+
+          {/*  */}
+          
           <span
             class={`home-product-item__brand ${isAdd ? "is-add" : ""}`}
             onClick={() => {

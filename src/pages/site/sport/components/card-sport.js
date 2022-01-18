@@ -27,6 +27,8 @@ useEffect(()=>{
           <div className="item-sport_content">
             <div className="title">{item.nameEvent}</div>
             <div className="description">{item.content}</div>
+            {/* chỉ member mới đky giải đc */}
+            {(auth?.role === "ROLE_3") && (
             <div className="btn-register">
               <div
                 className={`btn-register_content ${
@@ -48,7 +50,7 @@ useEffect(()=>{
               >
                 {state.isRegister ? "Đăng ký thành công" : "Đăng ký"}
               </div>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>
