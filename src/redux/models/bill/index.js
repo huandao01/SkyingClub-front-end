@@ -1,4 +1,4 @@
-import fetchProvider from "@data-access/event-provider";
+import fetchProvider from "@data-access/bill-provider";
 import baseStore from "../base-store";
 
 export default {
