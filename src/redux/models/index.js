@@ -8,4 +8,5 @@ import shop from "./shop";
 import event from "./event";
 import product from "./product";
 import rank from "./rank";
-export { auth, post, cache, like, comment, account, shop, event, product, rank };
+import bill from "./bill";
+export { auth, post, cache, like, comment, account, shop, event, product, rank,bill };

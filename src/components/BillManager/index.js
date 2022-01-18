@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { StyledGioHang } from "./styled";
-import { getImg } from "@src/utils/common";
-import billProvider from "@src/data-access/bill-provider";
+
 
 const StyledFooter = styled.div`
   .footer-list-product {
@@ -35,7 +34,8 @@ const BillList = ({
   deleteProduct,
   onCreate,
   auth,
-  getUser
+  getUser,
+  getBill
 }) => {
   const column = [
     {
@@ -46,10 +46,10 @@ const BillList = ({
       render: (_, __, idx) => idx + 1,// tham soso 1 : lấy giá trị của  trường dataindex trong object, ts 2: cả object, ts3: chỉ số
     },
     {
-      title: "Tên",
+      title: "Tên khách hàng",
       key: "fullName",
       dataIndex: "fullName",
-      width: "25%",
+      width: "15%",
       render: (_, data) => (
         <div className="full-name">
           {/* <div className="avatar">
@@ -61,7 +61,7 @@ const BillList = ({
     {
       title: "Tên sản phẩm",
       key: "nameProduct",
-      width: "30%",
+      width: "25%",
       render: (value, data) => data.productName
     },
     {
@@ -113,19 +113,13 @@ const BillList = ({
   ]; 
 
   useEffect(() => {
-    billProvider._search({page: 0 ,size: 999}).then(
-      (res) => {
-        if(res&& res.code === 0) {
-          listBill = res.data;
-        }
-      }
-    )
+    getBill({page: 0, size: 999})
   },[]); 
   
   return (
     <Modal
       visible={true}
-      width={700}
+      width={1000}
       title="Danh sách đơn hàng"
       onCancel={onCancel}
       footer={
@@ -135,8 +129,7 @@ const BillList = ({
               <div
                 className="btn-footer btn-ok"
                 onClick={() => {
-                  onCancel();                 
-                  
+                  onCancel();                      
                 }}
               >
                 Ok
@@ -161,12 +154,18 @@ const BillList = ({
 };
 
 export default connect(
-  ({ shop: { listAdd }, auth: {auth}, rank : {_listData: listUser} }  ) => ({ listAdd, auth, listUser }),
-  ({ shop: { updateData, changeProduct, deleteProduct, onCreate },rank: {_getList: getUser}  }) => ({
+  ({ shop: { listAdd }, auth: {auth}, rank : {_listData: listUser}, bill : {_listData : listBill} }  ) => ({
+     listAdd,
+     auth,
+     listUser,
+     listBill
+     }),
+  ({ shop: { updateData, changeProduct, deleteProduct, onCreate },rank: {_getList: getUser}, bill: {_getList : getBill}  }) => ({
     updateData,
     changeProduct,
     deleteProduct,
     onCreate,
-    getUser
+    getUser,
+    getBill
   })
 )(BillList);

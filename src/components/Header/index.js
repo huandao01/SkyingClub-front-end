@@ -260,8 +260,8 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
           }}
         />
       )}
-      {state.BillManager && (   
-        <ModalProfile
+      {state.showBill && (   
+        <BillManager
           onCancel={() => {
             setState({ showBill: false });
           }}
