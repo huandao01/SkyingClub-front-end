@@ -38,7 +38,7 @@ const Login = ({ _login, history }) => {
     <WrapperStyled>
       <div className="center-container">
         <div className="header-w3l">
-          <h1>Online Login Form</h1>
+          <h1>Skying Club</h1>
         </div>
         <div className="main-content-agile">
           <div className="sub-main-w3">

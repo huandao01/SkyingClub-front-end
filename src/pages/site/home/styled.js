@@ -413,7 +413,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   }
   .sub-w3l h6 a {
     font-size: 0.9em;
-    color: #fff;
+    color: #e32636;
     letter-spacing: 1px;
     text-align: right;
     display: inherit;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const WrapperStyled = styled.div`
-  background: url(${require("@images/bg-auth.jpg").default}) no-repeat center
+  background: url(${require("@images/Capture.PNG").default}) no-repeat center
     top;
   background-size: cover;
   -webkit-background-size: cover;
@@ -67,10 +67,9 @@ export const WrapperStyled = styled.div`
     outline: none;
     font-size: 0.9em;
     padding: 1em 3em 1em 1em;
-    border: none;
-    margin-bottom: 0.3em;
-    background: rgba(255, 255, 255, 0.85);
-    width: 82%;
+    border: 1px solid #ccc;
+    background: #fff;
+    width: 100%;
     color: #000;
     border-radius: 30px;
     font-weight: 400;
@@ -82,8 +81,8 @@ export const WrapperStyled = styled.div`
     margin: 10em auto 12em;
   }
   .sub-w3l h6 a {
-    font-size: 0.9em;
-    color: #fff;
+    font-size: 1.2em;
+    color: #e32636;
     letter-spacing: 1px;
     text-align: right;
     display: inherit;
@@ -112,7 +111,7 @@ export const WrapperStyled = styled.div`
   }
   .sub-main-w3 input[type="submit"] {
     color: white;
-    background: #ea2858;
+    background: #047af6;
     border: none;
     padding: 0.7em 0;
     outline: none;
