@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { StyledGioHang } from "../styled";
 import billProvider from "@src/data-access/bill-provider";
+import { auth } from "@src/redux/models";
 
 const StyledFooter = styled.div`
   .footer-list-product {
@@ -54,6 +55,7 @@ const GioHang = ({
               >
                 Hủy đơn
               </div>
+              {(auth?.role === "ROLE_1" || auth?.role === "ROLE_3") && (
               <div
                 className="btn-footer btn-ok"
                 onClick={() => {
@@ -73,7 +75,7 @@ const GioHang = ({
                 }}
               >
                 Xác nhận
-              </div>
+              </div>)}
             </div>
           )}
         </StyledFooter>
