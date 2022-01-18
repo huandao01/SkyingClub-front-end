@@ -1,5 +1,5 @@
 import { Button, Spin, Tooltip } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { Profiler, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ModalProfile from "../ModalProfile";
@@ -7,6 +7,8 @@ import { routes } from "./constant";
 import { dataHistorySearch } from "./data";
 import { WrapperStyled } from "./styled";
 import clientUtils from "@utils/client-utils";
+import ManagerMember from "../MemberManager";
+import BillManager from "../BillManager";
 
 const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
   const [state, _setState] = useState({
@@ -14,7 +16,9 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
     loading: false,
     showHistory: false,
     showProfile: false,
+    showMemberManager: false,
     searchStr: "",
+    showBill: false,
   });
 
   const setState = (data) => {
@@ -197,6 +201,25 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                     >
                       <span>Tài Khoản của tôi</span>
                     </li>
+
+                    <li
+                      className="header__navbar-user-menu-link"
+                      onClick={() => {
+                        setState({ showMemberManager: true });
+                      }}
+                    >
+                      <span>Xem DS thành viên</span>
+                    </li>
+                    
+                    <li
+                      className="header__navbar-user-menu-link"
+                      onClick={() => {
+                        setState({ showBill: true });
+                      }}
+                    >
+                      <span>Xem DS đặt hàng</span>
+                    </li>
+
                     <li
                       className="header__navbar-user-menu-link"
                       onClick={_logout}
@@ -222,14 +245,29 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
           </div>
         </nav>
       </header>
+      {state.showMemberManager && (
+        <ManagerMember
+          onCancel={() => {
+            setState({ showMemberManager: false });
+          }}
+        />
+      )}
 
-      {state.showProfile && (
+      {state.showProfile && (   
         <ModalProfile
           onCancel={() => {
             setState({ showProfile: false });
           }}
         />
       )}
+      {state.BillManager && (   
+        <ModalProfile
+          onCancel={() => {
+            setState({ showBill: false });
+          }}
+        />
+      )}
+      
     </WrapperStyled>
   );
 };

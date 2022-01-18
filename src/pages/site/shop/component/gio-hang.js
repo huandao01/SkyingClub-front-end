@@ -63,6 +63,8 @@ const GioHang = ({
                      res => {
                        if(res && res.code === 0 ) {
                         message.success("Đặt hàng thành công");
+                        onCancel();
+                        onCreate();
                        }
                      }
                    )

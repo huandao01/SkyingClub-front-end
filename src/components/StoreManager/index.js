@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { WrapperStyled } from "./styled";
 
 
-const Rank = ({ listRank = [],getRank }) => {
+const ManagerMember = ({ listRank = [],getRank }) => {
   const [state, _setState] = useState({});
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -31,8 +31,9 @@ const Rank = ({ listRank = [],getRank }) => {
       render: (_, data) => (
         <div className="full-name">
           <div className="avatar">
-            <img src={getImg(data.avatar)} /></div>
-          <div className="full-name">{data.fullName}</div>
+            <img src={getImg(data.avatar)} />
+          </div>
+          <div className="full-name">{data.userName}</div>
         </div>
       ),
     },
@@ -99,4 +100,4 @@ export default connect(
   }) => ({
     getRank
   })
-)(Rank);
+)(ManagerMember);

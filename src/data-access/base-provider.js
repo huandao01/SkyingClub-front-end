@@ -13,7 +13,7 @@ export default (API = "") => ({
             ...param,
           }),
           {},
-          true
+ //         true
         )
         .then((x) => {
           resolve(x);
