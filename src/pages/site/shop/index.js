@@ -4,10 +4,11 @@ import GioHang from "./component/gio-hang";
 import Product from "./component/product";
 import { data } from "./data";
 import { WrapperStyled } from "./styled";
-// import AddProduct from "../AddProduct";
+import ModalCreatePost from "@src/components/ModalCreatePost";
+import ModalCreateProduct from "../ModalCreateProduct";
 
 const Shop = ({ auth, listAdd = [],listProduct =[], getProduct }) => {
-  const [state, _setState] = useState({ showBill: false });
+  const [state, _setState] = useState({ showBill: false , showCreatedProduct: false });
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
@@ -25,15 +26,14 @@ useEffect(()=>{
             <div className="row sm-gutter app__content">
               <div className="col l-2 m-0 c-0">
                 <div className="category-pc">
-                  <nav className="category">
-                   
+                  <nav className="category">      
                     <div className="category__heading-wrapper">
                       <i className="category__heading-icon fas fa-th-large"></i>
                       <div className="category__heading">Cửa hàng</div>
                     </div>
                     {/* Thêm sản phẩm */}
                     {(auth?.role === "ROLE_1") && (
-                    <div className="btn-add-list" onClick={() => setState({ showBill: true })}>
+                    <div className="btn-add-list" onClick={() => setState({ showCreatedProduct: true })}>
 
                     <div className="btn-add">
                       <i className="btn-add-icon fas fa-plus-circle"></i>
@@ -57,11 +57,7 @@ useEffect(()=>{
               </div>
             </div>
           </div>
-   
-        </div>
-        
-                    
-
+        </div>    
         <footer className="footer">
           <div className="grid wide footer__content">
             <div className="row">
@@ -126,15 +122,11 @@ useEffect(()=>{
                     
                   </li>
                   <li className="footer-item">
-                    <a href="" className="footer-item__link">
-                      
-                
+                    <a href="" className="footer-item__link">            
                     </a>
                   </li>
                   <li className="footer-item">
                     <a href="" className="footer-item__link">
-                     
-                     
                     </a>
                   </li>
                 </ul>
@@ -165,6 +157,9 @@ useEffect(()=>{
 
       {state.showBill && (
         <GioHang onCancel={() => setState({ showBill: false })} />
+      )}
+      {state.showCreatedProduct && (
+        <ModalCreateProduct onCancel={() => setState({ showCreatedProduct: false })} />
       )}
     </WrapperStyled>
   );
