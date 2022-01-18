@@ -943,6 +943,24 @@ export const WrapperStyled = styled.div`
     text-align: center;
   }
 
+  .btn-add-list {
+    margin: 20px 110px 0;
+    .btn-add {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--var-color);
+      border-radius: 50%;
+    }
+  
+    .btn-add-icon {
+      color: white;
+      font-size: 25px;
+    }
+  }
+
   .buy-bottom {
     position: fixed;
     bottom: 10px;

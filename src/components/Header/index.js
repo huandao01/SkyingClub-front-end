@@ -9,6 +9,7 @@ import { WrapperStyled } from "./styled";
 import clientUtils from "@utils/client-utils";
 import ManagerMember from "../MemberManager";
 import BillManager from "../BillManager";
+import AddProduct from "../AddProduct";
 
 const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
   const [state, _setState] = useState({
@@ -202,6 +203,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                       <span>Tài Khoản của tôi</span>
                     </li>
 
+                    {(auth?.role === "ROLE_1") && (
                     <li
                       className="header__navbar-user-menu-link"
                       onClick={() => {
@@ -209,8 +211,9 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                       }}
                     >
                       <span>Xem DS thành viên</span>
-                    </li>
+                    </li>)}
                     
+                    {(auth?.role === "ROLE_1") && (
                     <li
                       className="header__navbar-user-menu-link"
                       onClick={() => {
@@ -218,7 +221,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                       }}
                     >
                       <span>Xem DS đặt hàng</span>
-                    </li>
+                    </li>)}
 
                     <li
                       className="header__navbar-user-menu-link"
