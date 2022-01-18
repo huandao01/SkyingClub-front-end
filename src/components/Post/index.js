@@ -9,6 +9,7 @@ import InputComment from "./input-comment";
 import { WrapperStyled } from "./styled";
 
 const Post = ({
+  onCancel = () => {},
   id,
   content,
   author,
@@ -150,7 +151,7 @@ const Post = ({
             <img src={getImg(avatar)} alt="" className="frame-header-avt" />
             <ul className="container__body--main-frame-headerNT">
               <li className="frame-header-name">{author}</li>
-              <li className="frame-header-time">{timeFromNow(createdAt)}</li>
+              <li className="frame-header-time">{createdAt}</li>
             </ul>
           </div>
           <div className="sidebar">
@@ -307,6 +308,7 @@ const Post = ({
         }}
         onOk={() => {
           deletePost(id);
+          onCancel();
         }}
       >
         <div style={{ textAlign: "center", fontSize: 20, fontWeight: "bold" }}>

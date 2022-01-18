@@ -2,11 +2,12 @@ import fileProvider from "@src/data-access/file-provider";
 import clientUtils from "@src/utils/client-utils";
 import { getImg } from "@src/utils/common";
 import { Button, Input, message, Modal, Tooltip } from "antd";
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { connect, Provider } from "react-redux";
 import { WrapperStyled } from "./styled";
+import userProvider from "@src/data-access/user-provider";
 
-const ModalProfile = ({ auth, _createOrEdit, onCancel, updateAuth }) => {
+const ModalProfile = ({ auth, _createOrEdit, onCancel, updateAuth , userInfor = [], getUserInfor}) => {
   const [state, _setState] = useState({
     isEdit: false,
   });
@@ -36,6 +37,12 @@ const ModalProfile = ({ auth, _createOrEdit, onCancel, updateAuth }) => {
       onCancel();
     });
   };
+
+  useEffect(() => {
+     getUserInfor(auth.userId);
+  },[]); 
+
+  console.log(userInfor.fullName);
 
   return (
     <Modal
@@ -80,13 +87,14 @@ const ModalProfile = ({ auth, _createOrEdit, onCancel, updateAuth }) => {
         {state.isEdit ? (
           <>
             <div className="fullName">
+              
               <Input
                 value={state.fullName}
                 onChange={(e) => setState({ fullName: e.target.value })}
                 placeholder={auth.full_name}
               />
             </div>
-            <div className="username">{auth.username}</div>
+            <div className="username">{auth.username }</div>
             <input
               id="avatar-id"
               type="file"
@@ -121,6 +129,14 @@ const ModalProfile = ({ auth, _createOrEdit, onCancel, updateAuth }) => {
               <img src={getImg(auth.avatar)} />
             </div>
             <div className="email">{auth.email}</div>
+            <div className="">Thời gian tham gia:  {userInfor.createdAt}</div>
+            <div className="">Số điện thoại:  {userInfor.phoneNumber}</div>
+            <div className="">Ngày sinh:  {userInfor.dateOfBirth}</div>
+            <div className="">Sở thích:  {userInfor.interest}</div>
+            <div className="">Điểm số:  {userInfor.score}</div>  
+            <div className="">Số xu hiện có:  {userInfor.coin}</div>  
+            <div className=""> Số giải đã tham gia:  {userInfor.eventName.length }</div>  
+
           </>
         )}
       </WrapperStyled>
@@ -129,9 +145,10 @@ const ModalProfile = ({ auth, _createOrEdit, onCancel, updateAuth }) => {
 };
 
 export default connect(
-  ({ auth: { auth } }) => ({ auth }),
-  ({ account: { _createOrEdit }, auth: { updateAuth } }) => ({
+  ({ auth: { auth }, rank: {_dataFilter : userInfor} }) => ({ auth, userInfor }),
+  ({ account: { _createOrEdit }, auth: { updateAuth }, rank: {_detail : getUserInfor} }) => ({
     _createOrEdit,
     updateAuth,
+    getUserInfor,
   })
 )(ModalProfile);

@@ -202,6 +202,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                       <span>Tài Khoản của tôi</span>
                     </li>
 
+                    {(auth?.role === "ROLE_1") && (
                     <li
                       className="header__navbar-user-menu-link"
                       onClick={() => {
@@ -209,8 +210,9 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                       }}
                     >
                       <span>Xem DS thành viên</span>
-                    </li>
+                    </li>)}
                     
+                    {(auth?.role === "ROLE_1") && (
                     <li
                       className="header__navbar-user-menu-link"
                       onClick={() => {
@@ -218,7 +220,7 @@ const Header = ({ auth, historySearch, saveHistory, _logout, getListPost }) => {
                       }}
                     >
                       <span>Xem DS đặt hàng</span>
-                    </li>
+                    </li>)}
 
                     <li
                       className="header__navbar-user-menu-link"

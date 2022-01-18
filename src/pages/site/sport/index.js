@@ -17,7 +17,7 @@ const Sport = ({listEvent = [], getEvent}) => {
 
   return (
     <WrapperStyled>
-      <div>
+       <div>
           <div className="title-group">SkyingClub</div>
           <div className="list-sport">
           {listEvent.map((item, idx) => (

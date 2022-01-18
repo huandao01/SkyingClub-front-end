@@ -16,13 +16,9 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
   };
-
-
- 
-
   useEffect(() => {
     getlistBaiViet({size:20});
-    getEvent({size: 4});
+    getEvent();
     // getUser();
   }, []);
 
@@ -33,17 +29,12 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
           <div className="container__product-list">
             {listProduct.slice(0,6).map((item, index) => (
                    <a href="http://localhost:3000/skyingclub/shop" className="container__adver-link">
-                   <div key={index} href="" className="container__product-link">
-                                        <img
-                                          src={item.imgPath}
-                                          alt=""
-                                          className="container__product-img"
-                                        />
-                                        <span className="container__product-title">{item.name}</span>
-                                        <span className="container__product-buy">Xem ngay</span>
-                                      </div>
-                              
-                            </a>
+                    <div key={index} href="" className="container__product-link">
+                      <img src={item.imgPath} valt="" className="container__product-img"/>
+                         <span className="container__product-title">{item.name}</span>
+                          <span className="container__product-buy">Xem ngay</span>
+                     </div>
+                    </a>
                   ))
             }
           </div>
@@ -79,30 +70,16 @@ const Home = ({ auth, getUser, getlistBaiViet, listBaiViet, updateData , listPro
         <div className="container_list_event">
             {listEvent.slice(0,4).map((item, index) => (
                    <a href="http://localhost:3000/skyingclub/sport" className="container__adver-link">
-                   <div key={index} href="" className="container__adver-link">
-                                        <img
-                                          src={item.imgPath}
-                                          alt=""
-                                          className="container__adver-img"
-                                        />
-                                        <span className="container__product-title">{item.nameEvent}</span>
+                      <div key={index} href="" className="container__adver-link">
+                        <img src={item.imgPath} alt= "" className="container__adver-img"/>
+                        <span className="container__product-title">{item.nameEvent}</span>
                                         
-                                      </div>
-                              
-                            </a>
+                      </div>              
+                    </a>
                   ))
             }
           </div>
-       
-        {/* <div className="container_list_event">          
-          {listProduct.map((item, idx) => (
-            <div className="container_adver-link">
-              <CardSport key={idx} item={item} />
-              </div>
-          ))}
-          
-        </div>              */}
-      </div>
+             </div>
       {state.showModalPost && (
         <ModalCreatePost
           onClose={() => {

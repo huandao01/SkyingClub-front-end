@@ -5,7 +5,7 @@ export default {
   ...baseStore({
     fetchProvider,
     storeName: "event",
-    title: "Bài viết",
+    title: "Giải thể thao",
       
   }),
 };

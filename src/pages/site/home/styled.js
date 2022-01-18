@@ -16,8 +16,7 @@ export const WrapperStyled = styled.div`
   }
   .container_list_event {
     flex: 1;
-
-    margin-top: 5px;
+    margin-top: 25px;
     text-align: center;
   }
   .container_event{
