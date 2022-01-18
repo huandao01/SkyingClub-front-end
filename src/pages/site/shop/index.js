@@ -4,8 +4,9 @@ import GioHang from "./component/gio-hang";
 import Product from "./component/product";
 import { data } from "./data";
 import { WrapperStyled } from "./styled";
+// import AddProduct from "../AddProduct";
 
-const Shop = ({ listAdd = [],listProduct =[], getProduct }) => {
+const Shop = ({ auth, listAdd = [],listProduct =[], getProduct }) => {
   const [state, _setState] = useState({ showBill: false });
   const setState = (data) => {
     _setState((pre) => ({ ...pre, ...data }));
@@ -30,7 +31,14 @@ useEffect(()=>{
                       <i className="category__heading-icon fas fa-th-large"></i>
                       <div className="category__heading">Cửa hàng</div>
                     </div>
-                    
+                    {/* Thêm sản phẩm */}
+                    {(auth?.role === "ROLE_1") && (
+                    <div className="btn-add-list" onClick={() => setState({ showBill: true })}>
+
+                    <div className="btn-add">
+                      <i className="btn-add-icon fas fa-plus-circle"></i>
+                    </div>
+                    </div>)}
 
                     <ul className="category-list"></ul>
                   </nav>
@@ -165,7 +173,7 @@ useEffect(()=>{
 //export default connect(({ shop: { listAdd } }) => ({ listAdd }))(Shop);
 
 export default connect(
-  ({ shop: { listAdd } , product: { _listData : listProduct } }) => ({
+  ({ auth: { auth } ,  shop: { listAdd } , product: { _listData : listProduct } }) => ({ auth,
     listAdd,
     listProduct,
   }),
