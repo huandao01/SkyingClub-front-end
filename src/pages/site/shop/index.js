@@ -49,14 +49,13 @@ useEffect(()=>{
               </div>
 
               <div className="col l-10 m-12 c-12">
-              {(auth?.role === "ROLE_3" || auth?.role === "ROLE_1") && (
                 <div className="home-product">
                   <div className="row sm-gutter">
                     {listProduct.map((item, idx) => (
                       <Product key={idx} data={item} />
                     ))}
                   </div>
-                </div>)}
+                </div>
               </div>
             </div>
           </div>
